@@ -1,0 +1,251 @@
+/* Подключаем шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+html, body {
+    height: 100%; /* Страница занимает всю высоту экрана */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Используем flexbox для позиционирования */
+}
+
+/* Основные стили для body */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    background-image: url('../images/all_back.jpg'); /* Укажите путь к вашему изображению */
+    background-size: contain; /* Изображение будет покрывать весь фон */
+    background-position: center; /* Центрирование изображения */
+    background-attachment: fixed; /* Фон будет фиксированным */
+}
+
+/* Шапка сайта */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+header h1 {
+    font-family: 'Great Vibes', cursive; /* Применяем новый шрифт */
+    font-size: 3em; /* Увеличиваем размер для эффектного заголовка */
+    color: #fff; /* Цвет текста */
+    margin: 5px;
+}
+
+/* Стили для иконок рядом с ссылками в навигации */
+header nav a {
+    display: inline-flex; /* Позволяет выровнять иконку и текст по одной линии */
+    align-items: center;  /* Центрирование иконки по вертикали */
+    margin: 0 12px;       /* Отступы между ссылками */
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav a img {
+    margin-right: 4px;    /* Отступ между иконкой и текстом */
+    height: 20px;          /* Высота изображения равна высоте текста */
+    width: auto;          /* Пропорциональная ширина */
+}
+
+header h1 a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    flex: 1; /* Основной контент растягивается, заполняя оставшееся пространство */
+    padding: 20px;
+}
+
+/* Основной контейнер для страницы записи */
+#booking-container {
+    width: 60%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    background-color: #acacac;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 7px;
+}
+
+.tab-button.active {
+    background-color: #222;
+    color: #fff;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.service-category {
+    display: flex;
+    justify-content: space-between;
+}
+
+.categories, .services-list {
+    width: 45%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.categories ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.categories ul li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.categories ul li:hover {
+    background-color: #f1f1f1;
+}
+
+.services-list p {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.next-button, .book-button {
+    display: block;
+    margin: 30px auto;
+    padding: 10px 30px;
+    background-color: #333;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.next-button[disabled], .book-button[disabled] {
+    background-color: grey;
+}
+
+.next-button:hover:not([disabled]), .book-button:hover:not([disabled]) {
+    background-color: #555;
+}
+
+/* Прокручиваемый список */
+.scrollable-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.service-item {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.service-item:hover {
+    background-color: #f1f1f1;
+}
+
+.service-item.selected {
+    background-color: #ddd;
+    border-color: #bbb;
+}
+
+.master-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.master-item:hover {
+    background-color: #f1f1f1;
+}
+
+.master-item.selected {
+    background-color: #ddd;
+    border-color: #bbb;
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.master-info {
+    font-size: 14px;
+}
+
+#date, #time {
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: calc(50% - 40px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+    position: relative;
+    width: 100%;
+}

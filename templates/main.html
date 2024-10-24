@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Главная страница{% endblock %}
+{% block css %}{% static 'css/my_style.css' %}{% endblock %}
+
+{% block content %}
+    <div class="centered-box">
+        <section id="hero-image">
+            <div class="hero-text-box">
+                <h3>О нашем салоне</h3>
+                <p>Добро пожаловать в салон красоты "Beauty Style"! Наш салон – это уютное пространство для тех, кто хочет почувствовать себя обновленным, красивым и полным сил. Мы предлагаем широкий спектр услуг по уходу за волосами, кожей и телом, обеспечивая индивидуальный подход к каждому клиенту. Наши мастера – профессионалы с большим опытом, всегда следят за последними тенденциями в мире красоты и используют только качественные материалы.</p>
+                <p>Мы стремимся создать атмосферу, в которой вы сможете расслабиться и полностью довериться нашим специалистам. Независимо от того, ищете ли вы стильную стрижку, модное окрашивание, маникюр или расслабляющий массаж, мы всегда готовы предложить вам услуги на высшем уровне.</p>
+            </div>
+        </section>
+
+        <section id="booking">
+            <div class="booking-class">
+                <button id="open-booking-modal" class="booking-button" onclick="location.href='{% url 'booking' %}'">Записаться онлайн</button>
+            </div>
+            <p style="text-align: center">Для записи также можно позвонить по номеру: +7 123-456-78-90</p>
+        </section>
+
+        <section id="services">
+            <div class="h2-wrapper">
+                <h2>Наши Услуги</h2>
+            </div>
+            <div class="services-class">
+                <div class="service">
+                    <img src="{% static 'images/serv1.jpg' %}" alt="Услуга 1" class="service-image" data-service="haircut">
+                    <h3>Стрижка</h3>
+                    <p>Профессиональная стрижка для любого типа волос.</p>
+                    <ul class="subservices-list" id="haircut" style="display: none;">
+                        <li>Мужская стрижка — 1000 руб.</li>
+                        <li>Женская стрижка — 1500 руб.</li>
+                        <li>Детская стрижка — 800 руб.</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <img src="{% static 'images/serv2.1.jpg' %}" alt="Услуга 2" class="service-image" data-service="coloring">
+                    <h3>Окрашивание</h3>
+                    <p>Модное окрашивание с использованием качественных красителей.</p>
+                    <ul class="subservices-list" id="coloring" style="display: none;">
+                        <li>Полное окрашивание — 3000 руб.</li>
+                        <li>Омбре — 3500 руб.</li>
+                        <li>Мелирование — 2500 руб.</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <img src="{% static 'images/serv3.1.jpeg' %}" alt="Услуга 3" class="service-image" data-service="manicure">
+                    <h3>Маникюр</h3>
+                    <p>Стильный маникюр, который подчеркнет вашу индивидуальность.</p>
+                    <ul class="subservices-list" id="manicure" style="display: none;">
+                        <li>Классический маникюр — 1200 руб.</li>
+                        <li>Французский маникюр — 1400 руб.</li>
+                        <li>Аппаратный маникюр — 1500 руб.</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <img src="{% static 'images/serv4.jpg' %}" alt="Услуга 4" class="service-image" data-service="pedicure">
+                    <h3>Педикюр</h3>
+                    <p>Качественный педикюр для ваших ног.</p>
+                    <ul class="subservices-list" id="pedicure" style="display: none;">
+                        <li>Классический педикюр — 1600 руб.</li>
+                        <li>Аппаратный педикюр — 1800 руб.</li>
+                        <li>SPA педикюр — 2000 руб.</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <img src="{% static 'images/serv5.1.jpg' %}" alt="Услуга 5" class="service-image" data-service="massage">
+                    <h3>Массаж</h3>
+                    <p>Расслабляющий массаж для снятия напряжения.</p>
+                    <ul class="subservices-list" id="massage" style="display: none;">
+                        <li>Классический массаж — 2500 руб.</li>
+                        <li>Антицеллюлитный массаж — 2800 руб.</li>
+                        <li>Расслабляющий массаж — 3000 руб.</li>
+                    </ul>
+                </div>
+
+                <div class="service">
+                    <img src="{% static 'images/serv6.jpg' %}" alt="Услуга 6" class="service-image" data-service="facial">
+                    <h3>Уход за лицом</h3>
+                    <p>Комплексные процедуры для ухода за кожей лица.</p>
+                    <ul class="subservices-list" id="facial" style="display: none;">
+                        <li>Чистка лица — 2000 руб.</li>
+                        <li>Маски для лица — 1500 руб.</li>
+                        <li>Антивозрастной уход — 3500 руб.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="h2-wrapper">
+                <h2>Наши Мастера</h2>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery1.jpg' %}" alt="Галерея 1">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery2.jpg' %}" alt="Галерея 2">
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'images/gallery3.jpg' %}" alt="Галерея 3">
+            </div>
+            <br>
+        </section>
+
+        <section id="reviews"> 
+            <div class="h2-wrapper">
+                <h2>Отзывы</h2>
+            </div>
+            <div class="reviews-wrapper">
+                <button class="scroll-button left" id="scroll-left">&#10094;</button>
+                <div class="reviews-container" id="reviews-container">
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar1.jpg' %}" alt="Ольга П." class="avatar">
+                            <p class="review-author">- Ольга П.</p>
+                        </div>
+                        <p class="review-text">"Спасибо за маникюр! Первый раз попробовала покрытие fedya, классный цвет!"</p>
+                    </div>
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar2.jpg' %}" alt="Екатерина Л." class="avatar">
+                            <p class="review-author">- Екатерина Л.</p>
+                        </div>
+                        <p class="review-text">"Я восхищена качеством обслуживания и профессионализмом вашей команды."</p>
+                    </div>
+                    <!-- Отзыв 3 -->
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar3.jpg' %}" alt="Ирина М." class="avatar"> <!-- Замените на свой путь к аватару -->
+                            <p class="review-author">- Ирина М.</p>
+                        </div>
+                        <p class="review-text">"Очень понравился массаж. Специалист знает свое дело. Рекомендую!"</p>
+                    </div>
+                    <!-- Отзыв 4 -->
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar4.jpg' %}" alt="Светлана К." class="avatar"> <!-- Замените на свой путь к аватару -->
+                            <p class="review-author">- Светлана К.</p>
+                        </div>
+                        <p class="review-text">"Классная команда, всегда остаюсь довольна результатом."</p>
+                    </div>
+                    <!-- Отзыв 5 -->
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar5.jpg' %}" alt="Марина А." class="avatar"> <!-- Замените на свой путь к аватару -->
+                            <p class="review-author">- Марина А.</p>
+                        </div>
+                        <p class="review-text">"Замечательный уход за лицом! Кожа выглядит здоровой и свежей."</p>
+                    </div>
+                    <!-- Отзыв 6 -->
+                    <div class="review">
+                        <div class="review-author-info">
+                            <img src="{% static 'images/avatar6.jpg' %}" alt="Иван С." class="avatar"> <!-- Замените на свой путь к аватару -->
+                            <p class="review-author">- Иван С.</p>
+                        </div>
+                        <p class="review-text">"Был приятно удивлен качеством услуг и уровнем сервиса."</p>
+                    </div>
+                </div>
+                <button class="scroll-button right" id="scroll-right">&#10095;</button>
+            </div>
+        </section>
+
+        <section id="map" style="position: relative;">
+            <div class="contact-box">
+                <h3>Контакты</h3>
+                <p>Телефон: +7 123-456-78-90</p><br>
+                <p>Email: Beautystyle@gmail.com</p><br>
+                <p>Режим работы:</p>
+                <p>C 11:00 до 21:00</p>
+                <p>без выходных</p><br>
+                <p>Адрес: ул. Ленина, 46, Уфа, Респ. Башкортостан, 450077</p>
+            </div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1385.3382103543443!2d55.94891888420812!3d54.72840945709914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sru!4v1727184725037!5m2!1sru!2sru"
+                style="border:0; width: 100%; height: 500px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </section>
+     </div>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% endblock %}

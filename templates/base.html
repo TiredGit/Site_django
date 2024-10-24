@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% block css %}{% endblock %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}" sizes="32x32" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'main' %}" style="text-decoration: none; color: #fff;">Салон красоты "Beauty Style"</a></h1>
+        <nav>
+            <a href="{% url 'booking' %}"><img src="{% static 'images/nav1.png' %}" alt="-">Записаться</a>
+            <a href="{% url 'main' %}#services"><img src="{% static 'images/nav2.png' %}" alt="-">Услуги</a>
+            <a href="{% url 'main' %}#gallery"><img src="{% static 'images/nav3.png' %}" alt="-">Галерея</a>
+            <a href="{% url 'main' %}#map"><img src="{% static 'images/nav4.png' %}" alt="-">Контакты</a>
+            {% if user %}
+                <div class="user-menu">
+                    <a href="{% url 'profile' %}" id="open-cabinet">
+                        <img src="{% static 'images/nav5.png' %}" alt="-">
+                        {{ user.name }}
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'profile' %}">Мой профиль</a>
+                        <a href="{% url 'logout' %}">Выйти</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" id="open-register"><img src="{% static 'images/nav5.png' %}" alt="-">
+                    Регистрация/Вход</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>Салон красоты "Beauty Style" © 2024</p>
+    </footer>
+
+</body>
+</html>

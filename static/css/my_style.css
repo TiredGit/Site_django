@@ -1,0 +1,318 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    background-image: url('../images/all_back.jpg'); /* Укажите путь к вашему изображению */
+    background-size: contain; /* Изображение будет покрывать весь фон */
+    background-position: center; /* Центрирование изображения */
+    background-attachment: fixed; /* Фон будет фиксированным */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+header h1 {
+    font-family: 'Great Vibes', cursive; /* Применяем новый шрифт */
+    font-size: 3em; /* Увеличиваем размер для эффектного заголовка */
+    color: #fff; /* Цвет текста */
+    margin: 5px;
+}
+
+
+/* Стили для иконок рядом с ссылками в навигации */
+header nav a {
+    display: inline-flex; /* Позволяет выровнять иконку и текст по одной линии */
+    align-items: center;  /* Центрирование иконки по вертикали */
+    margin: 0 12px;       /* Отступы между ссылками */
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav a img {
+    margin-right: 4px;    /* Отступ между иконкой и текстом */
+    height: 20px;          /* Высота изображения равна высоте текста */
+    width: auto;          /* Пропорциональная ширина */
+}
+
+
+.centered-box {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1); /* полупрозрачный фон */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* более выраженная тень */
+    border-radius: 15px;
+    overflow: hidden; /* для корректного отображения содержимого */
+}
+
+section {
+    padding: 15px;
+}
+
+/* Стили для раздела с изображением */
+#hero-image {
+    position: relative;
+    width: 98%; /* Ширина на всю рамку (70%) */
+    height: 600px; /* Фиксированная высота изображения */
+    background-image: url('../images/site_back.jpg'); /* Замените на путь к вашему изображению */
+    background-size: cover; /* Изображение покрывает весь блок */
+    background-position: center; /* Центрирование изображения */
+    margin-bottom: 30px; /* Отступ снизу для отделения изображения от следующего контента */
+    border-radius: 15px; /* Закругленные углы */
+    overflow: hidden; /* Чтобы содержимое не выходило за границы */
+}
+
+/* Стили для текстового блока поверх изображения */
+.hero-text-box {
+    position: absolute;
+    top: 50%; /* Центрирование по вертикали */
+    left: 10%; /* Расположить в левой части изображения */
+    transform: translateY(-50%); /* Для точного центрирования по вертикали */
+    width: 375px; /* Ширина блока с текстом */
+    height: 450px;
+    background-color: rgba(0, 0, 0, 0.7); /* Черный полупрозрачный фон */
+    padding: 20px;
+    color: #fff; /* Белый текст */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Тень вокруг блока */
+    border-radius: 10px; /* Скругленные углы */
+}
+
+.hero-text-box h2 {
+    margin-top: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hero-text-box p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.booking-class {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.booking-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #000;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.booking-button:hover {
+    background-color: #444;
+}
+
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Выравнивание заголовков <h2> */
+h2 {
+    text-align: center; /* Центрируем заголовки по горизонтали */
+    position: relative;
+}
+
+/* Контейнер для черной полосы с выравниванием текста */
+.h2-wrapper {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    background-color: #333; /* Черная полоса */
+    color: white; /* Цвет текста в полосе */
+    height: 34px; /* Высота полосы */
+    margin: 15px 0; /* Отступы сверху и снизу */
+    padding: 10px;
+    width: 99%; /* Полоса на всю ширину страницы */
+}
+
+
+.services-class {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.service {
+    width: 28%;
+    margin: 10px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.service img {
+    width: 100%;
+    height: 240px;
+    border-radius: 10px;
+}
+
+.subservices-list {
+    list-style-type: none; /* Убираем маркеры списка */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 10px auto; /* Центрируем блок подуслуг */
+    width: 90%; /* Занимает 90% ширины родительского блока */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+}
+
+.subservices-list li {
+    padding: 5px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gallery-item {
+    display: inline-block;
+    margin: 10px;
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Стили для контактной информации */
+.contact-box {
+    position: absolute;
+    top: 50%; /* Расположить посередине карты по вертикали */
+    left: 10%; /* Расположить в левой части карты */
+    transform: translateY(-50%); /* Центрирование по вертикали */
+    width: 270px;
+    height: 320px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Тень */
+    border-radius: 10px;
+    text-align: center;
+    z-index: 10; /* Обеспечивает, что контактная информация будет выше карты */
+}
+
+.contact-box p {
+    margin: 0 0 10px; /* Уменьшить отступы между строками */
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Стили для карты */
+#map iframe {
+    width: 100%; /* Ширина карты на всю рамку */
+    height: 500px; /* Фиксированная высота карты */
+    border: none; /* Убрать границы iframe */
+    border-radius: 15px; /* Закругленные углы */
+    overflow: hidden; /* Чтобы карта не выходила за границы */
+}
+
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+}
+
+
+/* Основной блок для отзывов */
+.reviews-container {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Стиль каждого отзыва */
+.review {
+    min-width: 45%; /* Каждый отзыв занимает 50% ширины контейнера */
+    flex: 0 0 48%;  /* Отзыв занимает 50% пространства в контейнере */
+    box-sizing: border-box;
+    margin: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 250px;
+    overflow: auto;
+}
+
+/* Обертка для отзывов */
+.reviews-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px; /* Ширина контейнера отзывов */
+    margin: 0 auto;
+    height: 15%;
+}
+.avatar {
+    width: 80px; /* Сделаем аватарки чуть больше */
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    align-self: center; /* Центрируем аватар по горизонтали */
+}
+.review-author-info {
+    display: flex; /* Расположение аватара и имени в строку */
+    align-items: center; /* Центрирование по вертикали */
+    margin-right: 15px; /* Отступ между аватаром и текстом */
+}
+.review-author {
+    margin-left: 10px; /* Отступ между аватаром и именем */
+    font-weight: bold; /* Жирный шрифт для имени автора */
+}
+
+/* Кнопки для прокрутки */
+.scroll-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 25px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    border-radius: 50%;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    height: 45px;
+    width: 45px;
+}
+
+.scroll-button.left {
+    left: -55px;
+}
+
+.scroll-button.right {
+    right: -60px;
+}
+
+.scroll-button:hover {
+    opacity: 1;
+}
+
+

@@ -1,0 +1,303 @@
+
+html, body {
+    height: 100%; /* Страница занимает всю высоту экрана */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Используем flexbox для позиционирования */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    background-image: url('../images/all_back.jpg'); /* Укажите путь к вашему изображению */
+    background-size: contain; /* Изображение будет покрывать весь фон */
+    background-position: center; /* Центрирование изображения */
+    background-attachment: fixed; /* Фон будет фиксированным */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+header h1 {
+    font-family: 'Great Vibes', cursive; /* Применяем новый шрифт */
+    font-size: 3em; /* Увеличиваем размер для эффектного заголовка */
+    color: #fff; /* Цвет текста */
+    margin: 5px;
+}
+
+
+/* Стили для иконок рядом с ссылками в навигации */
+header nav a {
+    display: inline-flex; /* Позволяет выровнять иконку и текст по одной линии */
+    align-items: center;  /* Центрирование иконки по вертикали */
+    margin: 0 12px;       /* Отступы между ссылками */
+    color: #fff;
+    text-decoration: none;
+}
+
+header nav a img {
+    margin-right: 4px;    /* Отступ между иконкой и текстом */
+    height: 20px;          /* Высота изображения равна высоте текста */
+    width: auto;          /* Пропорциональная ширина */
+}
+
+main {
+    flex: 1; /* Основной контент растягивается, заполняя оставшееся пространство */
+    padding: 20px;
+}
+
+.profile-container div {
+    transition: opacity 0.5s ease;
+}
+
+.hidden {
+    opacity: 0;
+    display: none;
+}
+
+.profile-container {
+    max-width: 600px;
+    width: 80%;
+    margin: 0 auto;
+    padding: 25px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали (если нужно) */
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-container .user-info p {
+    font-size: 18px;
+    margin: 10px 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-container form .form-group {
+    margin-bottom: 15px;
+}
+
+.profile-container form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-container form input[type="text"],
+.profile-container form input[type="tel"],
+.profile-container form input[type="date"],
+.profile-container form input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profile-container form button {
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.profile-container form button:hover {
+    background-color: #444;
+}
+
+button#edit-button {
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s;
+}
+
+button#edit-button:hover {
+    background-color: #444;
+}
+
+
+.error { 
+    color: red; 
+    font-family: 'Montserrat', sans-serif;
+}
+.success { 
+    color: green; 
+    font-family: 'Montserrat', sans-serif;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+/* Скрытие форм по умолчанию */
+#edit-form {
+    display: none;
+}
+
+.centered-box {
+    padding: 20px;
+    }
+.error {
+    color: red;
+    font-weight: bold;
+    }
+.success {
+    color: green;
+    font-weight: bold;
+
+}
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #333;
+    color: white;
+    position: relative;
+    width: 100%;
+}
+
+.table {
+	width: 100%;
+	border: none;
+	margin-bottom: 20px;
+	border-collapse: separate;
+    table-layout: fixed;
+}
+.table thead th {
+	font-weight: bold;
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	background: #EDEDED;
+	font-size: 14px;
+	border-top: 1px solid #ddd;
+}
+.table tr th:first-child, .table tr td:first-child {
+	border-left: 1px solid #ddd;
+}
+.table tr th:last-child, .table tr td:last-child {
+	border-right: 1px solid #ddd;
+}
+.table thead tr th:first-child {
+	border-radius: 20px 0 0 0;
+}
+.table thead tr th:last-child {
+	border-radius: 0 20px 0 0;
+}
+.table tbody td {
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+}
+.table tbody tr:nth-child(even) {
+	background: #F8F8F8;
+}
+.table tbody tr:last-child td{
+	border-bottom: 1px solid #ddd;
+}
+.table tbody tr:last-child td:first-child {
+	border-radius: 0 0 0 20px;
+}
+.table tbody tr:last-child td:last-child {
+	border-radius: 0 0 20px 0;
+}
+
+.profile-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between; /* Убедитесь, что блоки с аватаром и данными не налезают друг на друга */
+    gap: 20px; /* Расстояние между аватаром и текстом */
+}
+
+#avatar-block {
+    width: 150px; /* Ширина аватарки */
+    height: 150px; /* Высота аватарки */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.profile-avatar {
+    width: 150px; /* Ширина аватарки */
+    height: 150px; /* Высота аватарки */
+    border-radius: 50%; /* Закругление до круга */
+    object-fit: cover; /* Обрезка изображения, чтобы оно вписалось */
+    border: 2px solid #ccc; /* Граница для аватарки */
+    display: block; /* Блочный элемент для центровки */
+    margin: 0 auto; /* Центровка */
+}
+
+
+#change-avatar, #delete-avatar {
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+.edit-profile-content {
+    display: flex;
+    justify-content: space-between; /* Текстовые поля и аватар будут на разных сторонах */
+    align-items: flex-start; /* Выровнять элементы по верхней границе */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+}
+
+.edit-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Поля редактирования выстраиваются вертикально */
+    gap: 15px; /* Расстояние между полями */
+}
+
+#avatar-edit-block {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-avatar-edit {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    margin-bottom: 10px;
+}
