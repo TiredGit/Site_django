@@ -71,6 +71,10 @@ def register(request):
 
         user = models.MyUser.objects.create(name=name, phone=phone, password=hashed_password, birthday=birthday)
 
+        request.session['user_id'] = user.id
+        request.session['user_name'] = user.name
+        return redirect('main')
+
     return render(request, 'register.html', {'user': user})
 
 
