@@ -14,7 +14,7 @@
             <p><strong>Номер телефона: </strong>{{user.phone}}</p>
             {% if user.email %}
                 <p><strong>Электронная почта: </strong>{{user.email}}</p>
-            {{ endif }}
+            {% endif %}
             <p><strong>Дата рождения: </strong>{{user.birthday}}</p>
             <p><strong>Баланс бонусов: </strong>{{user.bonuses}}</p>
             <button id="edit-button" class="button">Редактировать данные</button>
