@@ -1,0 +1,84 @@
+.centered-box {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1); /* полупрозрачный фон */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* более выраженная тень */
+    border-radius: 15px;
+    overflow: hidden; /* для корректного отображения содержимого */
+}
+
+section {
+    padding: 15px;
+}
+
+h2 {
+    text-align: center; /* Центрируем заголовки по горизонтали */
+    position: relative;
+}
+
+/* Контейнер для черной полосы с выравниванием текста */
+.h2-wrapper {
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center; /* Центрирование по вертикали */
+    background-color: #333; /* Черная полоса */
+    color: white; /* Цвет текста в полосе */
+    height: 34px; /* Высота полосы */
+    margin: 15px 0; /* Отступы сверху и снизу */
+    padding: 10px;
+    width: 99%; /* Полоса на всю ширину страницы */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.gallery img {
+    width: 24%; /* 4 изображения в ряд */
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
+
+.modal {
+    display: none; /* Скрыть по умолчанию */
+    position: fixed; /* Остаться на месте */
+    z-index: 1000; /* На переднем плане */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включить прокрутку при необходимости */
+    background-color: rgb(0,0,0); /* Цвет фона */
+    background-color: rgba(0,0,0,0.9); /* Полупрозрачный черный */
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    height: 75%;
+    max-width: 900px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}

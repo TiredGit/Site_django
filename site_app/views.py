@@ -4,9 +4,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-
 from site_app import models
 
+import re
+
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def main(request):
@@ -36,6 +39,7 @@ def login(request):
         if check_password(password, user.password):
             request.session['user_id'] = user.id
             request.session['user_name'] = user.name
+            request.session['user_bonuses'] = user.bonuses
             return redirect('main')
         else:
             messages.error(request, "Неверный пароль.")
@@ -54,6 +58,7 @@ def register(request):
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
         birthday = request.POST.get('birthday')
+        email = request.POST.get('email')
 
         if not (phone.startswith('+7') and len(phone) == 12 and phone[1:].isdigit()):
             messages.error(request, "Неверный формат номера")
@@ -67,12 +72,33 @@ def register(request):
             messages.error(request, "Пользователь с таким номером телефона уже существует.")
             return redirect('register')
 
+        if email:
+            email_regex = r'^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,6}$'
+            if not re.match(email_regex, email):
+                messages.error(request, "Неверный формат email.")
+                return redirect('register')
+
+            if models.MyUser.objects.filter(email=email).exists():
+                messages.error(request, "Пользователь с такой почтой уже существует.")
+                return redirect('register')
+
         hashed_password=make_password(password1)
 
-        user = models.MyUser.objects.create(name=name, phone=phone, password=hashed_password, birthday=birthday)
+        user = models.MyUser.objects.create(name=name, phone=phone, password=hashed_password, birthday=birthday, email=email)
 
         request.session['user_id'] = user.id
         request.session['user_name'] = user.name
+        request.session['user_bonuses'] = user.bonuses
+
+        if email:
+            send_mail(
+                'Успешная регистрация!',
+                f'Спасибо за регистрацию на нашем сайте, {user.name}!',
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False,
+            )
+
         return redirect('main')
 
     return render(request, 'register.html', {'user': user})
@@ -87,10 +113,18 @@ def booking(request):
     user = None
     if 'user_id' in request.session:
         user = models.MyUser.objects.get(id=request.session['user_id'])
-    return render(request, 'booking.html', {'user': user})
+        return render(request, 'booking.html', {'user': user, 'show_modal': False})
+    else:
+        return render(request, 'booking.html', {'user': user, 'show_modal': True})
 
 def profile(request):
     user = None
     if 'user_id' in request.session:
         user = models.MyUser.objects.get(id=request.session['user_id'])
     return render(request, 'profile.html', {'user': user})
+
+def gallery(request):
+    user = None
+    if 'user_id' in request.session:
+        user = models.MyUser.objects.get(id=request.session['user_id'])
+    return render(request, 'gallery.html', {'user': user})

@@ -10,14 +10,21 @@
         
     <div class="profile-content">
         <div id="user-info" style="display: block;">
-            <p><strong>Имя:</strong> Тимур</p>
-            <p><strong>Номер телефона:</strong> +79177644103</p>
-            <p><strong>Дата рождения:</strong> 27.10.2004</p>
-            <p><strong>Баланс бонусов:</strong> 100 руб.</p>
+            <p><strong>Имя: </strong>{{user.name}}</p>
+            <p><strong>Номер телефона: </strong>{{user.phone}}</p>
+            {% if user.email %}
+                <p><strong>Электронная почта: </strong>{{user.email}}</p>
+            {{ endif }}
+            <p><strong>Дата рождения: </strong>{{user.birthday}}</p>
+            <p><strong>Баланс бонусов: </strong>{{user.bonuses}}</p>
             <button id="edit-button" class="button">Редактировать данные</button>
         </div>
-		    <div id="avatar-block">
-            <img src="{% static 'images/default_avatar.jpg' %}" alt="Аватар профиля" class="profile-avatar">
+        <div id="avatar-block">
+            {% if user.picture %}
+                <img src="{{ user.picture.url }}" alt="Аватар профиля" class="profile-avatar">
+            {% else %}
+                <img src="{% static 'images/default_avatar.jpg' %}" alt="Аватар профиля" class="profile-avatar">
+            {% endif %}
         </div>
     </div>
         <div id="edit-form" style="display: none;">
@@ -70,7 +77,6 @@
         <div class="centered-box">
         <h2>Мои записи</h2>
 
-        
                     <table class="table">
                 <thead>
                     <tr>
@@ -83,15 +89,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                                            <tr>
-                            <td>Стрижка</td>
-                            <td>Мужская стрижка</td>
-                            <td>Мастер 1</td>
-                            <td>15.10.2024</td>
-                            <td>15:00</td>
-                            <td>ааа</td>
-                        </tr>
-                                    </tbody>
+                    <tr>
+                        <td>Стрижка</td>
+                        <td>Мужская стрижка</td>
+                        <td>Мастер 1</td>
+                        <td>15.10.2024</td>
+                        <td>15:00</td>
+                        <td>ааа</td>
+                    </tr>
+                </tbody>
             </table>
             </div>
     </div>

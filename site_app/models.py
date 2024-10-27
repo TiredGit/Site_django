@@ -4,6 +4,7 @@ from django.db import models
 class MyUser(models.Model):
     name = models.CharField(verbose_name='Имя', max_length=100)
     phone = models.CharField(verbose_name='Телефон', max_length=100, unique=True)
+    email = models.EmailField(verbose_name='Почта', unique=True, null=True, blank=True)
     picture = models.ImageField(verbose_name='Аватарка', upload_to='profile_picture', blank=True, null=True)
     password = models.CharField(verbose_name='Пароль', max_length=100)
     birthday = models.DateField(verbose_name='Дата Рождения')
@@ -79,3 +80,19 @@ class Schedule(models.Model):
         verbose_name_plural = 'Расписания'
         ordering = ['date', 'time']
         unique_together = ('master', 'date', 'time')
+
+class Record(models.Model):
+    category = models.ForeignKey(Category, verbose_name='Категория',
+                                 related_name='records', on_delete=models.CASCADE)
+    service = models.ForeignKey(Service, verbose_name='Услуга',
+                                related_name='records', on_delete=models.CASCADE)
+    master = models.ForeignKey(Master, verbose_name='Мастер',
+                               related_name='records', on_delete=models.CASCADE)
+    datetime = models.ForeignKey(Schedule, verbose_name='Дата и время',
+                                 related_name='records', on_delete=models.SET_NULL, null=True)
+    info = models.TextField(verbose_name='Доп. информация', blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Запись'
+        verbose_name_plural = 'Записи'
+        ordering = ['datetime']
