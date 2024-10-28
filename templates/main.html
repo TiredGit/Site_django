@@ -93,6 +93,136 @@
             </div>
         </section>
 
+        <section class="masters-section">
+            <div class="h2-wrapper">
+                <h2>Наши Мастера</h2>
+            </div>
+            <!-- Кнопки выбора услуг -->
+            <div class="service-tabs">
+                <button class="service-tab" onclick="filterMasters('стрижка')">Стрижка</button>
+                <button class="service-tab" onclick="filterMasters('окрашивание')">Окрашивание</button>
+                <button class="service-tab" onclick="filterMasters('маникюр')">Маникюр</button>
+                <button class="service-tab" onclick="filterMasters('педикюр')">Педикюр</button>
+                <button class="service-tab" onclick="filterMasters('массаж')">Массаж</button>
+                <button class="service-tab" onclick="filterMasters('уход за лицом')">Уход за лицом</button>
+            </div>
+
+            <!-- Контейнер мастеров -->
+            <div class="masters-container">
+                <!-- Мастера по стрижке и окрашиванию -->
+                <div class="master-card" data-services="стрижка окрашивание">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Анна Иванова</h3>
+                        <p class="master-description">
+                            Специалист по стрижке и окрашиванию с опытом работы более 8 лет. Анна
+                            имеет портфолио современных стрижек и креативных окрасок. Участвовала
+                            в международных конкурсах, обучалась у ведущих стилистов.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="master-card" data-services="стрижка окрашивание">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Валерия Викторовна</h3>
+                        <p class="master-description">
+                            Эксперт по окрашиванию и стрижкам с 10-летним стажем. Валерия специализируется
+                            на сложных техниках мелирования и градиентного окрашивания. Проводит мастер-классы
+                            для начинающих стилистов.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="master-card" data-services="стрижка">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Ирина Павлова</h3>
+                        <p class="master-description">
+                            Профессионал с 5-летним опытом в области стрижки. Ирина специализируется
+                            на креативных и классических стилях. Создает индивидуальные образы,
+                            которые подчеркивают особенности клиента.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Мастера по маникюру и педикюру -->
+                <div class="master-card" data-services="маникюр педикюр">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Мария Петрова</h3>
+                        <p class="master-description">
+                            Мастер маникюра и педикюра с опытом работы более 6 лет. Мария занимается
+                            всеми видами маникюра, включая аппаратный и комбинированный. Обучалась в лучших
+                            школах ногтевого сервиса.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="master-card" data-services="маникюр педикюр">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Светлана Михайлова</h3>
+                        <p class="master-description">
+                            Профессионал с 7-летним стажем. Специализируется на дизайне ногтей,
+                            включая 3D-эффекты и френч. Светлана регулярно участвует в конкурсах
+                            и выставках, имеет множество наград.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Мастера по массажу и уходу за лицом -->
+                <div class="master-card" data-services="массаж уход за лицом">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Олег Сидоров</h3>
+                        <p class="master-description">
+                            Специалист по массажу и уходу за лицом с опытом более 12 лет. Олег владеет
+                            техникой релаксирующего массажа и процедурой лифтинга лица. Работает с
+                            высококачественными уходовыми средствами.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="master-card" data-services="массаж уход за лицом">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Дарья Громова</h3>
+                        <p class="master-description">
+                            Массажист-эстетист с опытом работы более 9 лет. Дарья специализируется
+                            на спортивном и антицеллюлитном массаже, а также на процедурах по уходу
+                            за кожей лица. Она использует натуральные и безопасные средства для
+                            ухода.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Мастера, предоставляющие несколько услуг -->
+                <div class="master-card" data-services="стрижка маникюр">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Елена Кузнецова</h3>
+                        <p class="master-description">
+                            Мастер по стрижке и маникюру с опытом 8 лет. Елена предлагает
+                            профессиональные стрижки и комплексный уход за руками. Постоянно
+                            совершенствует навыки, изучает новые техники.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="master-card" data-services="окрашивание уход за лицом">
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
+                    <div class="master-info">
+                        <h3 class="master-name">Наталья Смирнова</h3>
+                        <p class="master-description">
+                            Специалист по окрашиванию и уходу за лицом с 15-летним стажем.
+                            Наталья владеет техниками сложного окрашивания и предлагает
+                            индивидуальные программы ухода для разных типов кожи.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="reviews"> 
             <div class="h2-wrapper">

@@ -2,7 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import UpdateView, DetailView
 
 from site_app import models
 
@@ -24,7 +25,6 @@ def login(request):
     if request.method == 'POST':
         phone = request.POST.get('phone')
         password = request.POST.get('password')
-        print(f"Телефон введен: {phone}")
 
         if not (phone.startswith('+7') and len(phone) == 12 and phone[1:].isdigit()):
             messages.error(request, "Неверный формат номера")
@@ -117,10 +117,51 @@ def booking(request):
     else:
         return render(request, 'booking.html', {'user': user, 'show_modal': True})
 
+#class UserProfileView(DetailView):
+#    model = models.MyUser
+ #   template_name = 'profile.html'
+  #  context_object_name = 'user'
+#
+ #   def get_object(self, queryset=None):
+  #      user_id = self.request.session.get('user_id')
+   #     if user_id:
+    #        return models.MyUser.objects.get(id=user_id)
+     #   return None
+
+
 def profile(request):
-    user = None
-    if 'user_id' in request.session:
-        user = models.MyUser.objects.get(id=request.session['user_id'])
+    user = models.MyUser.objects.get(id=request.session['user_id'])
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        birthday = request.POST.get('birthday')
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_new_password = request.POST.get('confirm_new_password')
+
+        if not check_password(current_password, user.password):
+            messages.error(request, "Неверный текущий пароль.")
+            return redirect('profile')
+
+        if models.MyUser.objects.filter(phone=phone).exists():
+            messages.error(request, "Пользователь с таким номером телефона уже существует.")
+            return redirect('profile')
+
+        user.name = name
+        user.phone = phone
+        user.birthday = birthday
+
+        if new_password:
+            if new_password == confirm_new_password:
+                user.password = make_password(new_password)
+            else:
+                messages.error(request, "Новые пароли не совпадают.")
+                return redirect('profile')
+
+        user.save()
+        return redirect('profile')
+
     return render(request, 'profile.html', {'user': user})
 
 def gallery(request):

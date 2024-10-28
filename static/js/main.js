@@ -15,6 +15,30 @@ serviceImages.forEach(image => {
         }
     });
 });
+
+
+// Функция для фильтрации мастеров по выбранной услуге
+function filterMasters(service) {
+    // Получаем все карточки мастеров
+    const masterCards = document.querySelectorAll('.master-card');
+
+    // Проходим по каждой карточке и проверяем её услуги
+    masterCards.forEach(card => {
+        const services = card.getAttribute('data-services').toLowerCase();
+
+        // Если услуга соответствует выбранной, показываем карточку, иначе скрываем
+        if (services.includes(service.toLowerCase())) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+document.addEventListener('DOMContentLoaded', function() {
+    filterMasters('стрижка'); // Вызывает фильтрацию по умолчанию для услуги "Стрижка"
+});
+
+
 // Скролл отзывов
 // Находим контейнер с отзывами
 const reviewsContainer = document.getElementById('reviews-container');

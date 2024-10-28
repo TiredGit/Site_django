@@ -184,16 +184,80 @@ h2 {
     font-family: 'Montserrat', sans-serif;
 }
 
-.gallery-item {
-    display: inline-block;
-    margin: 10px;
+/* Основной стиль секции мастеров */
+.masters-section {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.section-title {
     text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-.gallery-item img {
-    width: 150px;
-    height: auto;
-    border-radius: 10px;
+/* Разделы услуг */
+.service-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.service-tab {
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.service-tab:hover {
+    background-color: #e0e0e0;
+}
+
+/* Стили контейнера с мастерами */
+.masters-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-height: 380px;
+    overflow-y: auto;
+    gap: 20px;
+}
+
+/* Стиль карточки мастера */
+.master-card {
+    width: 45%;
+    display: none;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    height: 140px;
+}
+.master-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    margin-right: 15px;
+}
+.master-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.master-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+.master-description {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0 0 0;
 }
 
 /* Стили для контактной информации */

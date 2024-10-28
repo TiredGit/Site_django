@@ -23,32 +23,33 @@
             {% if user.picture %}
                 <img src="{{ user.picture.url }}" alt="Аватар профиля" class="profile-avatar">
             {% else %}
-                <img src="{% static 'images/default_avatar.jpg' %}" alt="Аватар профиля" class="profile-avatar">
+                <img src="{% static 'images/default_avatar.png' %}" alt="Аватар профиля" class="profile-avatar">
             {% endif %}
         </div>
     </div>
         <div id="edit-form" style="display: none;">
             <h3>Редактировать данные</h3>
-            <form id="profile-form" action="http://91.108.243.55:7777/91.108.243.55/profile.php" method="post" enctype="multipart/form-data" novalidate="">
+            <form id="profile-form" action="{% url 'profile' %}" method="post" enctype="multipart/form-data" novalidate="">
+                {% csrf_token %}
 			    <div class="form-group">
-        <label for="avatar">Изменить аватар:</label>
-        <input type="file" id="avatar" name="avatar">
+                    <label for="avatar">Изменить аватар:</label>
+                    <input type="file" id="avatar" value="{{ user.picture }}" name="picture">
 				</div>
                 <div class="form-group">
                     <label for="name">Имя:</label>
-                    <input type="text" id="name" name="name" value="Тимур" required="">
+                    <input type="text" id="name" name="name" value="{{ user.name }}" required="">
                     <span class="error-message" id="name-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Номер телефона:</label>
-                    <input type="tel" id="phone" name="phone" value="+79177644103" required="" pattern="^\+7\d{10}$" placeholder="+71234567890">
+                    <input type="tel" id="phone" name="phone" value="{{ user.phone }}" required="" pattern="^\+7\d{10}$" placeholder="+71234567890">
                     <span class="error-message" id="phone-error"></span>
                 </div>
                 
                 <div class="form-group">
                     <label for="date_of_birth">Дата рождения:</label>
-                    <input type="date" id="date_of_birth" name="date_of_birth" value="2004-10-27" required="">
+                    <input type="date" id="date_of_birth" name="birthday" value="{{ user.birthday }}" required="">
                     <span class="error-message" id="dob-error"></span>
                 </div>
                 
@@ -69,7 +70,15 @@
                     <input type="password" id="confirm_new_password" name="confirm_new_password">
                     <span class="error-message" id="confirm-new-password-error"></span>
                 </div>
-                
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="message {{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
                 <button type="submit" name="update_profile">Сохранить изменения</button><br>
                 <button type="button" id="cancel-button">Отмена</button>
             </form>
