@@ -25,204 +25,61 @@
                 <h2>Наши Услуги</h2>
             </div>
             <div class="services-class">
+                {% for category in categories %}
                 <div class="service">
-                    <img src="{% static 'images/serv1.jpg' %}" alt="Услуга 1" class="service-image" data-service="haircut">
-                    <h3>Стрижка</h3>
-                    <p>Профессиональная стрижка для любого типа волос.</p>
-                    <ul class="subservices-list" id="haircut" style="display: none;">
-                        <li>Мужская стрижка — 1000 руб.</li>
-                        <li>Женская стрижка — 1500 руб.</li>
-                        <li>Детская стрижка — 800 руб.</li>
-                    </ul>
-                </div>
+                    {% if category.picture %}
+                    <img src="{{ category.picture.url }}" alt="Услуга" class="service-image" data-service="haircut">
+                    {% else %}
+                    <img src="{% static 'images/photo1.jpg' %}" alt="Услуга" class="service-image" data-service="haircut">
+                    {% endif %}
+                    <h3>{{category.name}}</h3>
+                    <p>{{category.description}}</p>
+                    <a href="{% url 'category_detail' category.id %}" class="description-button">Описание</a>
 
-                <div class="service">
-                    <img src="{% static 'images/serv2.1.jpg' %}" alt="Услуга 2" class="service-image" data-service="coloring">
-                    <h3>Окрашивание</h3>
-                    <p>Модное окрашивание с использованием качественных красителей.</p>
-                    <ul class="subservices-list" id="coloring" style="display: none;">
-                        <li>Полное окрашивание — 3000 руб.</li>
-                        <li>Омбре — 3500 руб.</li>
-                        <li>Мелирование — 2500 руб.</li>
-                    </ul>
                 </div>
-
-                <div class="service">
-                    <img src="{% static 'images/serv3.1.jpeg' %}" alt="Услуга 3" class="service-image" data-service="manicure">
-                    <h3>Маникюр</h3>
-                    <p>Стильный маникюр, который подчеркнет вашу индивидуальность.</p>
-                    <ul class="subservices-list" id="manicure" style="display: none;">
-                        <li>Классический маникюр — 1200 руб.</li>
-                        <li>Французский маникюр — 1400 руб.</li>
-                        <li>Аппаратный маникюр — 1500 руб.</li>
-                    </ul>
-                </div>
-
-                <div class="service">
-                    <img src="{% static 'images/serv4.jpg' %}" alt="Услуга 4" class="service-image" data-service="pedicure">
-                    <h3>Педикюр</h3>
-                    <p>Качественный педикюр для ваших ног.</p>
-                    <ul class="subservices-list" id="pedicure" style="display: none;">
-                        <li>Классический педикюр — 1600 руб.</li>
-                        <li>Аппаратный педикюр — 1800 руб.</li>
-                        <li>SPA педикюр — 2000 руб.</li>
-                    </ul>
-                </div>
-
-                <div class="service">
-                    <img src="{% static 'images/serv5.2.jpg' %}" alt="Услуга 5" class="service-image" data-service="massage">
-                    <h3>Массаж</h3>
-                    <p>Расслабляющий массаж для снятия напряжения.</p>
-                    <ul class="subservices-list" id="massage" style="display: none;">
-                        <li>Классический массаж — 2500 руб.</li>
-                        <li>Антицеллюлитный массаж — 2800 руб.</li>
-                        <li>Расслабляющий массаж — 3000 руб.</li>
-                    </ul>
-                </div>
-
-                <div class="service">
-                    <img src="{% static 'images/serv6.jpg' %}" alt="Услуга 6" class="service-image" data-service="facial">
-                    <h3>Уход за лицом</h3>
-                    <p>Комплексные процедуры для ухода за кожей лица.</p>
-                    <ul class="subservices-list" id="facial" style="display: none;">
-                        <li>Чистка лица — 2000 руб.</li>
-                        <li>Маски для лица — 1500 руб.</li>
-                        <li>Антивозрастной уход — 3500 руб.</li>
-                    </ul>
-                </div>
+                {% endfor %}
             </div>
         </section>
 
-        <section class="masters-section">
-            <div class="h2-wrapper">
-                <h2>Наши Мастера</h2>
-            </div>
-            <!-- Кнопки выбора услуг -->
-            <div class="service-tabs">
-                <button class="service-tab" onclick="filterMasters('стрижка')">Стрижка</button>
-                <button class="service-tab" onclick="filterMasters('окрашивание')">Окрашивание</button>
-                <button class="service-tab" onclick="filterMasters('маникюр')">Маникюр</button>
-                <button class="service-tab" onclick="filterMasters('педикюр')">Педикюр</button>
-                <button class="service-tab" onclick="filterMasters('массаж')">Массаж</button>
-                <button class="service-tab" onclick="filterMasters('уход за лицом')">Уход за лицом</button>
-            </div>
+    <section class="masters-section" id="masters">
+        <div class="h2-wrapper">
+            <h2>Наши Мастера</h2>
+        </div>
 
-            <!-- Контейнер мастеров -->
-            <div class="masters-container">
-                <!-- Мастера по стрижке и окрашиванию -->
-                <div class="master-card" data-services="стрижка окрашивание">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Анна Иванова</h3>
-                        <p class="master-description">
-                            Специалист по стрижке и окрашиванию с опытом работы более 8 лет. Анна
-                            имеет портфолио современных стрижек и креативных окрасок. Участвовала
-                            в международных конкурсах, обучалась у ведущих стилистов.
-                        </p>
-                    </div>
-                </div>
+        <!-- Ссылки для фильтрации -->
+        {% block sidebar %}
+        <!-- Кнопки для фильтрации по категориям с якорем -->
+        <div class="service-tabs">
+            {% for category in categories %}
+            <a href="?category={{ category.id }}#masters" class="service-tab">{{ category.name }}</a>
+            {% endfor %}
+            <a href="{% url 'main' %}#masters" class="service-tab">Все категории</a>
+        </div>
+        {% endblock %}
 
-                <div class="master-card" data-services="стрижка окрашивание">
+        <!-- Контейнер для мастеров -->
+        <div class="masters-container">
+            {% for master in masters %}
+            <div class="master-card" data-category="{{ master.category.all|join:', ' }}">
+                {% if master.picture %}
+                    <img src="{{ master.picture.url }}" alt="Фото мастера" class="master-photo">
+                {% else %}
                     <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Валерия Викторовна</h3>
-                        <p class="master-description">
-                            Эксперт по окрашиванию и стрижкам с 10-летним стажем. Валерия специализируется
-                            на сложных техниках мелирования и градиентного окрашивания. Проводит мастер-классы
-                            для начинающих стилистов.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="master-card" data-services="стрижка">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Ирина Павлова</h3>
-                        <p class="master-description">
-                            Профессионал с 5-летним опытом в области стрижки. Ирина специализируется
-                            на креативных и классических стилях. Создает индивидуальные образы,
-                            которые подчеркивают особенности клиента.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Мастера по маникюру и педикюру -->
-                <div class="master-card" data-services="маникюр педикюр">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Мария Петрова</h3>
-                        <p class="master-description">
-                            Мастер маникюра и педикюра с опытом работы более 6 лет. Мария занимается
-                            всеми видами маникюра, включая аппаратный и комбинированный. Обучалась в лучших
-                            школах ногтевого сервиса.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="master-card" data-services="маникюр педикюр">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Светлана Михайлова</h3>
-                        <p class="master-description">
-                            Профессионал с 7-летним стажем. Специализируется на дизайне ногтей,
-                            включая 3D-эффекты и френч. Светлана регулярно участвует в конкурсах
-                            и выставках, имеет множество наград.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Мастера по массажу и уходу за лицом -->
-                <div class="master-card" data-services="массаж уход за лицом">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Олег Сидоров</h3>
-                        <p class="master-description">
-                            Специалист по массажу и уходу за лицом с опытом более 12 лет. Олег владеет
-                            техникой релаксирующего массажа и процедурой лифтинга лица. Работает с
-                            высококачественными уходовыми средствами.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="master-card" data-services="массаж уход за лицом">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Дарья Громова</h3>
-                        <p class="master-description">
-                            Массажист-эстетист с опытом работы более 9 лет. Дарья специализируется
-                            на спортивном и антицеллюлитном массаже, а также на процедурах по уходу
-                            за кожей лица. Она использует натуральные и безопасные средства для
-                            ухода.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Мастера, предоставляющие несколько услуг -->
-                <div class="master-card" data-services="стрижка маникюр">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Елена Кузнецова</h3>
-                        <p class="master-description">
-                            Мастер по стрижке и маникюру с опытом 8 лет. Елена предлагает
-                            профессиональные стрижки и комплексный уход за руками. Постоянно
-                            совершенствует навыки, изучает новые техники.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="master-card" data-services="окрашивание уход за лицом">
-                    <img src="{% static 'images/photo1.jpg' %}" alt="Фото мастера" class="master-photo">
-                    <div class="master-info">
-                        <h3 class="master-name">Наталья Смирнова</h3>
-                        <p class="master-description">
-                            Специалист по окрашиванию и уходу за лицом с 15-летним стажем.
-                            Наталья владеет техниками сложного окрашивания и предлагает
-                            индивидуальные программы ухода для разных типов кожи.
-                        </p>
-                    </div>
+                {% endif %}
+                <div class="master-info">
+                    <h3 class="master-name">{{ master.name }}</h3>
+                    <p class="master-description">{{ master.description }}</p>
                 </div>
             </div>
-        </section>
+            {% empty %}
+            <p>Мастера для данной категории отсутствуют.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+
+
+
 
         <section id="reviews"> 
             <div class="h2-wrapper">
@@ -231,53 +88,22 @@
             <div class="reviews-wrapper">
                 <button class="scroll-button left" id="scroll-left">&#10094;</button>
                 <div class="reviews-container" id="reviews-container">
+
+                    {% for review in reviews %}
                     <div class="review">
                         <div class="review-author-info">
-                            <img src="{% static 'images/avatar1.jpg' %}" alt="Ольга П." class="avatar">
-                            <p class="review-author">- Ольга П.</p>
+                            {% if review.user.picture %}
+                            <img src="{{ review.user.picture.url }}" alt="{{ review.name }}" class="avatar">
+                            {% else %}
+                            <img src="{% static 'images/default_avatar.png' %}" alt="{{ review.name }}" class="avatar">
+                            {% endif %}
+                            <p class="review-author">{{ review.user.name }}</p>
                         </div>
-                        <p class="review-text">"Спасибо за маникюр! Первый раз попробовала покрытие fedya, классный цвет!"</p>
+                        <p class="review-text">{{ review.text }}</p>
+                        <p class="review-grade"><strong>Оценка: {{ review.grade }}/5</strong></p>
                     </div>
-                    <div class="review">
-                        <div class="review-author-info">
-                            <img src="{% static 'images/avatar2.jpg' %}" alt="Екатерина Л." class="avatar">
-                            <p class="review-author">- Екатерина Л.</p>
-                        </div>
-                        <p class="review-text">"Я восхищена качеством обслуживания и профессионализмом вашей команды."</p>
-                    </div>
-                    <!-- Отзыв 3 -->
-                    <div class="review">
-                        <div class="review-author-info">
-                            <img src="{% static 'images/avatar3.jpg' %}" alt="Ирина М." class="avatar"> <!-- Замените на свой путь к аватару -->
-                            <p class="review-author">- Ирина М.</p>
-                        </div>
-                        <p class="review-text">"Очень понравился массаж. Специалист знает свое дело. Рекомендую!"</p>
-                    </div>
-                    <!-- Отзыв 4 -->
-                    <div class="review">
-                        <div class="review-author-info">
-                            <img src="{% static 'images/avatar4.jpg' %}" alt="Светлана К." class="avatar"> <!-- Замените на свой путь к аватару -->
-                            <p class="review-author">- Светлана К.</p>
-                        </div>
-                        <p class="review-text">"Классная команда, всегда остаюсь довольна результатом."</p>
-                    </div>
-                    <!-- Отзыв 5 -->
-                    <div class="review">
-                        <div class="review-author-info">
-                            <img src="{% static 'images/avatar5.jpg' %}" alt="Марина А." class="avatar"> <!-- Замените на свой путь к аватару -->
-                            <p class="review-author">- Марина А.</p>
-                        </div>
-                        <p class="review-text">"Замечательный уход за лицом! Кожа выглядит здоровой и свежей."</p>
-                    </div>
-                    <!-- Отзыв 6 -->
-                    <div class="review">
-                        <div class="review-author-info">
-                            <img src="{% static 'images/avatar6.jpg' %}" alt="Иван С." class="avatar"> <!-- Замените на свой путь к аватару -->
-                            <p class="review-author">- Иван С.</p>
-                        </div>
-                        <p class="review-text">"Был приятно удивлен качеством услуг и уровнем сервиса."</p>
-                    </div>
-                </div>
+                    {% endfor %}
+
                 <button class="scroll-button right" id="scroll-right">&#10095;</button>
             </div>
         </section>

@@ -27,6 +27,17 @@
             {% endif %}
         </div>
     </div>
+
+    {% if request.GET.edit %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const editMenu = document.getElementById('edit-form');
+                if (editMenu) {
+                    editMenu.style.display = 'flex';  // Открываем меню редактирования
+                }
+            });
+        </script>
+    {% endif %}
         <div id="edit-form" style="display: none;">
             <h3>Редактировать данные</h3>
             <form id="profile-form" action="{% url 'profile' %}" method="post" enctype="multipart/form-data" novalidate="">
@@ -46,7 +57,12 @@
                     <input type="tel" id="phone" name="phone" value="{{ user.phone }}" required="" pattern="^\+7\d{10}$" placeholder="+71234567890">
                     <span class="error-message" id="phone-error"></span>
                 </div>
-                
+
+                <div class="form-group">
+                    <label for="id_email">Email:</label>
+                    <input type="email" name="email" id="id_email" value="{{ user.email }}" required>
+                </div>
+
                 <div class="form-group">
                     <label for="date_of_birth">Дата рождения:</label>
                     <input type="date" id="date_of_birth" name="birthday" value="{{ user.birthday }}" required="">

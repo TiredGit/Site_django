@@ -6,6 +6,16 @@ body {
     background-size: contain; /* Изображение будет покрывать весь фон */
     background-position: center; /* Центрирование изображения */
     background-attachment: fixed; /* Фон будет фиксированным */
+    height: 100%; /* Страница занимает всю высоту экрана */
+    display: flex;
+    flex-direction: column; /* Используем flexbox для позиционирования */
+}
+
+html {
+    height: 100%; /* Страница занимает всю высоту экрана */
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Используем flexbox для позиционирования */
 }
 
 header {

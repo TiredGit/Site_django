@@ -18,13 +18,17 @@ from django.contrib import admin
 from django.urls import path
 from site_app import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.main, name='main'),
+    path('', views.MainView.as_view(), name='main'),
+    path('category/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('booking/', views.booking, name='booking'),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', views.UserProfileView.as_view(), name='profile'),
     path('gallery/', views.gallery, name='gallery'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

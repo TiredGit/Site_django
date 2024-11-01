@@ -155,6 +155,12 @@ h2 {
 }
 
 .service {
+    display: flex;           /* Делаем контейнер флекс-контейнером */
+    flex-direction: column; /* Вертикальная ориентация элементов */
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    border: 1px solid #ccc; /* Для визуального разделения */
+    padding: 15px;         /* Внутренние отступы */
+    border-radius: 8px;    /* Закругленные углы */
     width: 28%;
     margin: 10px 0;
     text-align: center;
@@ -168,29 +174,29 @@ h2 {
     border-radius: 10px;
 }
 
-.subservices-list {
-    list-style-type: none; /* Убираем маркеры списка */
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin: 10px auto; /* Центрируем блок подуслуг */
-    width: 90%; /* Занимает 90% ширины родительского блока */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавляем тень */
+.description-button {
+    display: inline-block;
+    padding: 10px 20px; /* Размеры кнопки */
+    background-color: black; /* Цвет фона */
+    color: white; /* Цвет текста */
+    text-decoration: none; /* Убирает подчеркивание */
+    border-radius: 5px; /* Закругленные углы */
+    margin-top: 0; /* Отступ сверху */
+    margin-bottom: 6px;
 }
 
-.subservices-list li {
-    padding: 5px 0;
-    font-family: 'Montserrat', sans-serif;
+.description-button:hover {
+    background-color: darkgray; /* Цвет при наведении */
 }
 
-/* Основной стиль секции мастеров */
-.masters-section {
-    padding: 20px;
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+.service h3 {
+    margin-bottom: 5px; /* Уменьшает расстояние между заголовком и описанием */
 }
+
+.service p {
+    margin-top: 5px;    /* Уменьшает расстояние сверху у описания */
+}
+
 .section-title {
     text-align: center;
     font-size: 24px;
@@ -204,6 +210,7 @@ h2 {
     justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
+    text-decoration: none;
 }
 .service-tab {
     padding: 10px 20px;
@@ -212,9 +219,13 @@ h2 {
     border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
+    text-decoration: none; /* убирает подчёркивание */
+    color: inherit;
 }
 .service-tab:hover {
     background-color: #e0e0e0;
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Стили контейнера с мастерами */
@@ -227,10 +238,18 @@ h2 {
     gap: 20px;
 }
 
+/* Основной стиль секции мастеров */
+.masters-section {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Стиль карточки мастера */
 .master-card {
     width: 45%;
-    display: none;
+    display: flex;
     padding: 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -319,6 +338,8 @@ footer {
     border-radius: 10px;
     height: 250px;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Обертка для отзывов */
@@ -330,6 +351,7 @@ footer {
     max-width: 900px; /* Ширина контейнера отзывов */
     margin: 0 auto;
     height: 15%;
+    flex-direction: column;
 }
 .avatar {
     width: 80px; /* Сделаем аватарки чуть больше */
@@ -346,6 +368,10 @@ footer {
 .review-author {
     margin-left: 10px; /* Отступ между аватаром и именем */
     font-weight: bold; /* Жирный шрифт для имени автора */
+}
+.review-grade {
+    align-self: flex-start;
+    margin-top: auto;  /* Прижимает оценку к низу */
 }
 
 /* Кнопки для прокрутки */

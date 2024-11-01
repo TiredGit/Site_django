@@ -1,0 +1,106 @@
+/* Стили для заголовка */
+.centered-title {
+    text-align: center; /* Центрирует текст */
+    font-size: 36px; /* Размер шрифта заголовка */
+    font-weight: bold; /* Жирный текст */
+    margin: 20px 0; /* Отступ сверху и снизу */
+    color: #444; /* Цвет заголовка */
+}
+
+/* Стили для списка услуг */
+.services-list {
+    display: flex; /* Используем flexbox для списка услуг */
+    flex-direction: column; /* Вертикальное выравнивание */
+    gap: 20px; /* Отступы между элементами списка */
+}
+
+/* Стили для отдельных услуг */
+.service-item {
+    background-color: #fff; /* Цвет фона блока услуги */
+    border: 1px solid #ccc; /* Граница блока */
+    border-radius: 8px; /* Закругленные углы */
+    padding: 20px; /* Внутренние отступы */
+    margin-bottom: 20px; /* Отступ снизу */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень блока */
+    transition: transform 0.2s; /* Плавный эффект при наведении */
+}
+
+/* Эффект при наведении на блок услуги */
+.service-item:hover {
+    transform: translateY(-5px); /* Поднимает блок при наведении */
+}
+
+/* Стили для контента услуги */
+.service-content {
+    display: flex; /* Flexbox для содержимого услуги */
+    align-items: center; /* Центрирует содержимое по вертикали */
+}
+
+/* Стили для текста услуги */
+.service-text {
+    flex: 1; /* Занимает оставшееся место */
+    padding-right: 15px; /* Отступ справа для отделения от изображения */
+}
+
+/* Стили для контейнера изображения */
+.service-image-container {
+    flex: 0 0 auto; /* Задает фиксированную ширину контейнера */
+    max-width: 30%; /* Максимальная ширина 30% от родительского блока */
+    height: 300px; /* Устанавливаем высоту контейнера */
+    overflow: hidden; /* Скрывает переполнение */
+}
+
+/* Стили для изображений */
+.service-image {
+    height: 100%; /* Высота изображения на 100% от контейнера */
+    width: auto; /* Ширина изменяется пропорционально */
+    border-radius: 5px; /* Закругленные углы */
+    object-fit: cover; /* Обрезает изображение для соответствия размеру контейнера */
+}
+
+/* Стили для кнопки "Назад на главную" */
+.button-container {
+    text-align: center; /* Центрирует кнопку */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+.back-button {
+    background-color: #101010; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста кнопки */
+    padding: 10px 20px; /* Внутренние отступы кнопки */
+    border: none; /* Убирает границы */
+    border-radius: 5px; /* Закругленные углы */
+    text-decoration: none; /* Убирает подчеркивание текста */
+    font-weight: bold; /* Жирный текст */
+    transition: background-color 0.3s, transform 0.3s; /* Плавный переход */
+}
+
+.back-button:hover {
+    background-color: #454545; /* Цвет фона кнопки при наведении */
+    transform: translateY(-2px); /* Поднимает кнопку при наведении */
+}
+
+/* Стили для сообщения о том, что нет доступных услуг */
+.no-services-message {
+    text-align: center; /* Центрируем текст */
+    font-size: 20px; /* Размер шрифта */
+    color: #999; /* Цвет текста */
+    margin-top: 20px; /* Отступ сверху */
+    font-style: italic; /* Курсивный текст */
+}
+
+
+.centered-box {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1); /* полупрозрачный фон */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* более выраженная тень */
+    border-radius: 15px;
+    overflow: hidden; /* для корректного отображения содержимого */
+}
+
+section {
+    padding: 15px;
+}
+

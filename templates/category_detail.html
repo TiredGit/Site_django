@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ categories.name }} - Услуги{% endblock %}
+{% block css %}{% static 'css/category_detail.css' %}{% endblock %}
+
+{% block content %}
+
+<div class="centered-box">
+
+<h1 class="centered-title">{{ categories.name }}</h1>
+
+    <div class="services-list">
+        {% for service in services %}
+        <div class="service-item">
+            <div class="service-content">
+                <div class="service-text">
+                    <h3><strong>{{ service.name }}</strong></h3>
+                    <p>{{ service.description|linebreaks }}</p>
+                    <p><strong>Цена: {{ service.price }} руб.</strong></p>
+                </div>
+                <div class="service-image-container">
+                    {% if service.picture %}
+                        <img src="{{ service.picture.url }}" alt="{{ service.name }}" class="service-image">
+                    {% else %}
+                        <img src="{% static 'images/photo1.jpg' %}" alt="Стандартное изображение" class="service-image">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="no-services-message">Нет доступных услуг в этой категории.</p>
+        {% endfor %}
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'main' %}" class="back-button">Назад на главную</a>
+    </div>
+
+</div>
+
+{% endblock %}

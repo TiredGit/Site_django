@@ -14,6 +14,9 @@ class MyUser(models.Model):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
+    def __str__(self):
+        return self.name
+
 
 class Category(models.Model):
     name = models.CharField(verbose_name='Название категории', max_length=100, unique=True)
@@ -23,7 +26,10 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-        ordering = ['name']
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
 
 
 class Service(models.Model):
@@ -32,11 +38,16 @@ class Service(models.Model):
     description = models.TextField(verbose_name='Описание услуги', blank=True, null=True)
     category = models.ForeignKey(Category, verbose_name='Категория', related_name='services',
                                     on_delete=models.SET_NULL, null=True)
+    picture = models.ImageField(verbose_name='Изображение услуги', upload_to='service_picture',
+                                blank=True, null=True)
 
     class Meta:
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
         ordering = ['name']
+
+    def __str__(self):
+        return self.name
 
 
 class Master(models.Model):
@@ -48,7 +59,10 @@ class Master(models.Model):
     class Meta:
         verbose_name = 'Мастер'
         verbose_name_plural = 'Мастеры'
-        ordering = ['name']
+        ordering = ['id']
+
+    def __str__(self):
+        return self.name
 
 
 class Review(models.Model):
@@ -60,7 +74,7 @@ class Review(models.Model):
         (5, 'Отлично'),
     ]
     user = models.OneToOneField(MyUser, verbose_name='Имя пользователя',
-                                on_delete=models.CASCADE, related_name='reviews')
+                                on_delete=models.SET_NULL, related_name='reviews', null=True)
     text = models.TextField(verbose_name='Текст отзыва', blank=True, null=True)
     grade = models.PositiveIntegerField(verbose_name='Оценка', choices=GRADE_CHOICES)
 
@@ -68,6 +82,9 @@ class Review(models.Model):
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
         ordering = ['user']
+
+    def __str__(self):
+        return f"Отзыв от {self.user.name} - Оценка: {self.grade}"
 
 
 class Schedule(models.Model):
@@ -80,6 +97,10 @@ class Schedule(models.Model):
         verbose_name_plural = 'Расписания'
         ordering = ['date', 'time']
         unique_together = ('master', 'date', 'time')
+
+    def __str__(self):
+        return f'{self.date} {self.time}'
+
 
 class Record(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория',
@@ -96,3 +117,6 @@ class Record(models.Model):
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
         ordering = ['datetime']
+
+    def __str__(self):
+        return self.info
