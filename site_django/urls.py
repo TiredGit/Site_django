@@ -32,3 +32,6 @@ urlpatterns = [
     path('profile/', views.UserProfileView.as_view(), name='profile'),
     path('gallery/', views.gallery, name='gallery'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
