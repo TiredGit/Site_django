@@ -69,6 +69,7 @@ header nav a img {
 @media (max-width: 768px) {
     .centered-box {
         width: 100%; /* На мобильных устройствах ширина 100% */
+        margin: 10px;
     }
 }
 
