@@ -51,6 +51,28 @@ header nav a img {
     overflow: hidden; /* для корректного отображения содержимого */
 }
 
+/* Экран с соотношением сторон 16:9 */
+@media (min-aspect-ratio: 16/9) and (max-aspect-ratio: 16/9) {
+    .centered-box {
+        width: 70%; /* Изменяем ширину на 70% */
+    }
+}
+
+/* Экран с соотношением сторон 16:10 */
+@media (min-aspect-ratio: 16/10) and (max-aspect-ratio: 16/10) {
+    .centered-box {
+        width: 80%; /* Оставляем ширину 80% */
+    }
+}
+
+/* Для мобильных устройств (ширина экрана 768px и меньше) */
+@media (max-width: 768px) {
+    .centered-box {
+        width: 100%; /* На мобильных устройствах ширина 100% */
+        margin: 20px auto; /* Уменьшаем отступы */
+    }
+}
+
 section {
     padding: 15px;
 }
