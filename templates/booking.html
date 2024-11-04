@@ -69,7 +69,12 @@
         <a href="{% url 'login' %}" class="register-btn">Войти</a>
     </div>
 </div>
-
+<script>
+    // Открываем модальное окно при загрузке страницы
+    window.onload = function() {
+        document.getElementById('auth-modal').style.display = 'block';
+    };
+</script>
 {% endif %}
 
 {% endblock %}

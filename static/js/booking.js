@@ -123,10 +123,6 @@ let selectedService = null;
 let selectedMaster = null;
 let selectedServicePrice = null;
 
-window.onload = function() {
-        document.getElementById('auth-modal').style.display = 'block';
-    };
-
 // Функция для переключения вкладок
 function openTab(event, tabId) {
     const tabs = document.getElementsByClassName('tab-content');
