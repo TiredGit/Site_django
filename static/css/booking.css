@@ -182,8 +182,6 @@
 
 
 
-
-
 /* Стили для модального окна */
     .modal {
         display: none;
@@ -212,7 +210,7 @@
         display: inline-block;
         margin-top: 20px;
         padding: 10px;
-        background-color: #4CAF50;
+        background-color: #070707;
         color: white;
         text-decoration: none;
         border-radius: 4px;
