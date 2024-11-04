@@ -1,57 +1,3 @@
-
-html, body {
-    height: 100%; /* Страница занимает всю высоту экрана */
-    margin: 0;
-    display: flex;
-    flex-direction: column; /* Используем flexbox для позиционирования */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    background-image: url('../images/all_back.jpg'); /* Укажите путь к вашему изображению */
-    background-size: contain; /* Изображение будет покрывать весь фон */
-    background-position: center; /* Центрирование изображения */
-    background-attachment: fixed; /* Фон будет фиксированным */
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-}
-
-header h1 {
-    font-family: 'Great Vibes', cursive; /* Применяем новый шрифт */
-    font-size: 3em; /* Увеличиваем размер для эффектного заголовка */
-    color: #fff; /* Цвет текста */
-    margin: 5px;
-}
-
-
-/* Стили для иконок рядом с ссылками в навигации */
-header nav a {
-    display: inline-flex; /* Позволяет выровнять иконку и текст по одной линии */
-    align-items: center;  /* Центрирование иконки по вертикали */
-    margin: 0 12px;       /* Отступы между ссылками */
-    color: #fff;
-    text-decoration: none;
-}
-
-header nav a img {
-    margin-right: 4px;    /* Отступ между иконкой и текстом */
-    height: 20px;          /* Высота изображения равна высоте текста */
-    width: auto;          /* Пропорциональная ширина */
-}
-
-main {
-    flex: 1; /* Основной контент растягивается, заполняя оставшееся пространство */
-    padding: 20px;
-}
-
 .profile-container div {
     transition: opacity 0.5s ease;
 }
@@ -91,10 +37,6 @@ main {
     flex-direction: column;
 }
 
-.profile-container form .form-group {
-    margin-bottom: 15px;
-}
-
 .profile-container form label {
     font-weight: bold;
     margin-bottom: 5px;
@@ -103,6 +45,7 @@ main {
 
 .profile-container form input[type="text"],
 .profile-container form input[type="tel"],
+.profile-container form input[type="email"],
 .profile-container form input[type="date"],
 .profile-container form input[type="password"] {
     padding: 10px;
@@ -146,20 +89,13 @@ button#edit-button:hover {
 }
 
 
-.error { 
-    color: red; 
+.error {
+    color: red;
     font-family: 'Montserrat', sans-serif;
 }
-.success { 
-    color: green; 
+.success {
+    color: green;
     font-family: 'Montserrat', sans-serif;
-}
-
-@media (max-width: 768px) {
-    .profile-container {
-        width: 90%;
-        padding: 15px;
-    }
 }
 
 /* Скрытие форм по умолчанию */
@@ -178,15 +114,6 @@ button#edit-button:hover {
     color: green;
     font-weight: bold;
 
-}
-
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: white;
-    position: relative;
-    width: 100%;
 }
 
 .table {
@@ -286,11 +213,12 @@ footer {
     gap: 15px; /* Расстояние между полями */
 }
 
+/* Центрирование аватара и кнопки загрузки */
 #avatar-edit-block {
-    margin-left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .profile-avatar-edit {
@@ -300,4 +228,102 @@ footer {
     object-fit: cover;
     border: 2px solid #ccc;
     margin-bottom: 10px;
+}
+
+.avatar-input {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* Стили для полей ввода */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Стили для кнопок сохранения и отмены */
+.button-save, .button-cancel {
+    padding: 12px;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.button-save {
+    background-color: #333;
+    color: white;
+}
+
+.button-save:hover {
+    background-color: #444;
+}
+
+.button-cancel {
+    background-color: #bbb;
+    color: #333;
+}
+
+.button-cancel:hover {
+    background-color: #999;
+}
+
+/* Медиа-запрос для мобильных устройств */
+@media (max-width: 768px) {
+    .profile-container, .edit-form-container {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+button {
+    padding: 12px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Можно подкорректировать по вашему вкусу */
+}
+
+
+.messages-container {
+    display: flex;
+    justify-content: center;
+}
+
+ul.messages {
+    list-style-type: none; /* Убрать маркеры списка */
+    padding: 0;
+    text-align: center;
 }

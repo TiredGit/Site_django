@@ -1,46 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f4f4f4;
-    background-image: url('../images/all_back.jpg'); /* Укажите путь к вашему изображению */
-    background-size: contain; /* Изображение будет покрывать весь фон */
-    background-position: center; /* Центрирование изображения */
-    background-attachment: fixed; /* Фон будет фиксированным */
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-}
-
-header h1 {
-    font-family: 'Great Vibes', cursive; /* Применяем новый шрифт */
-    font-size: 3em; /* Увеличиваем размер для эффектного заголовка */
-    color: #fff; /* Цвет текста */
-    margin: 5px;
-}
-
-
-/* Стили для иконок рядом с ссылками в навигации */
-header nav a {
-    display: inline-flex; /* Позволяет выровнять иконку и текст по одной линии */
-    align-items: center;  /* Центрирование иконки по вертикали */
-    margin: 0 12px;       /* Отступы между ссылками */
-    color: #fff;
-    text-decoration: none;
-}
-
-header nav a img {
-    margin-right: 4px;    /* Отступ между иконкой и текстом */
-    height: 20px;          /* Высота изображения равна высоте текста */
-    width: auto;          /* Пропорциональная ширина */
-}
-
-
 .centered-box {
     width: 80%;
     margin: 50px auto;
@@ -329,14 +286,6 @@ h2 {
     border: none; /* Убрать границы iframe */
     border-radius: 15px; /* Закругленные углы */
     overflow: hidden; /* Чтобы карта не выходила за границы */
-}
-
-
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: white;
 }
 
 

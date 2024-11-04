@@ -21,12 +21,12 @@
             <a href="{% url 'main' %}#map"><img src="{% static 'images/nav4.png' %}" alt="-">Контакты</a>
             {% if user %}
                 <div class="user-menu">
-                    <a href="{% url 'profile' %}" id="open-cabinet">
+                    <a href="{% url 'profile' user.pk %}" id="open-cabinet">
                         <img src="{% static 'images/nav5.png' %}" alt="-">
                         {{ user.name }} (Бонусы: {{ user.bonuses }})
                     </a>
                     <div class="dropdown-content">
-                        <a href="{% url 'profile' %}">Мой профиль</a>
+                        <a href="{% url 'profile' user.pk %}">Мой профиль</a>
                         <a href="{% url 'logout' %}">Выйти</a>
                     </div>
                 </div>

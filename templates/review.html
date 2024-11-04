@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Создание отзыва{% endblock %}
+{% block css %}{% static 'css/review.css' %}{% endblock %}
+
+{% block content %}
+
+<div class="centered-box profile-container">
+    <div class="review-container">
+        <h3>Добавить отзыв</h3>
+        <form id="review-form" method="post">
+            {% csrf_token %}
+
+            <label for="review-text">Ваш отзыв:</label>
+            <textarea id="review-text" name="text" placeholder="Напишите ваш отзыв..." required></textarea>
+	        <div class="review-header">
+                <label for="rating-id">Оценка:</label>
+                <div class="rating-area" id="rating-id">
+                    <input type="radio" id="star-5" name="grade" value="5">
+                    <label for="star-5" title="Оценка 5"></label>
+                    <input type="radio" id="star-4" name="grade" value="4">
+                    <label for="star-4" title="Оценка 4"></label>
+                    <input type="radio" id="star-3" name="grade" value="3">
+                    <label for="star-3" title="Оценка 3"></label>
+                    <input type="radio" id="star-2" name="grade" value="2">
+                    <label for="star-2" title="Оценка 2"></label>
+                    <input type="radio" id="star-1" name="grade" value="1">
+                    <label for="star-1" title="Оценка 1"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-review-button">Отправить отзыв</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

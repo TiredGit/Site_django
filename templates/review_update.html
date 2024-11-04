@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Редактирование отзыва{% endblock %}
+{% block css %}{% static 'css/review.css' %}{% endblock %}
+
+{% block content %}
+
+<div class="centered-box profile-container">
+    <div class="review-container">
+        <h3>Редактировать отзыв</h3>
+        <form id="review-form" method="post">
+            {% csrf_token %}
+
+            <label for="review-text">Измените ваш отзыв:</label>
+            <textarea id="review-text" name="text" required>{{ review.text }}</textarea>
+
+            <div class="review-header">
+                <label for="rating-id">Измените оценку:</label>
+                <div class="rating-area" id="rating-id">
+                    <input type="radio" id="star-5" name="grade" value="5" {% if review.grade == 5 %}checked{% endif %}>
+                    <label for="star-5" title="Оценка 5"></label>
+                    <input type="radio" id="star-4" name="grade" value="4" {% if review.grade == 4 %}checked{% endif %}>
+                    <label for="star-4" title="Оценка 4"></label>
+                    <input type="radio" id="star-3" name="grade" value="3" {% if review.grade == 3 %}checked{% endif %}>
+                    <label for="star-3" title="Оценка 3"></label>
+                    <input type="radio" id="star-2" name="grade" value="2" {% if review.grade == 2 %}checked{% endif %}>
+                    <label for="star-2" title="Оценка 2"></label>
+                    <input type="radio" id="star-1" name="grade" value="1" {% if review.grade == 1 %}checked{% endif %}>
+                    <label for="star-1" title="Оценка 1"></label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-review-button">Сохранить изменения</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

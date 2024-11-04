@@ -10,6 +10,7 @@
         
     <div class="profile-content">
         <div id="user-info" style="display: block;">
+
             <p><strong>Имя: </strong>{{user.name}}</p>
             <p><strong>Номер телефона: </strong>{{user.phone}}</p>
             {% if user.email %}
@@ -17,7 +18,11 @@
             {% endif %}
             <p><strong>Дата рождения: </strong>{{user.birthday}}</p>
             <p><strong>Баланс бонусов: </strong>{{user.bonuses}}</p>
-            <button id="edit-button" class="button">Редактировать данные</button>
+
+            <a href="{% url 'edit_profile' user.pk %}">
+                <button id="edit-button" class="button">Редактировать данные</button>
+            </a>
+
         </div>
         <div id="avatar-block">
             {% if user.picture %}
@@ -28,81 +33,10 @@
         </div>
     </div>
 
-    {% if request.GET.edit %}
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const editMenu = document.getElementById('edit-form');
-                if (editMenu) {
-                    editMenu.style.display = 'flex';  // Открываем меню редактирования
-                }
-            });
-        </script>
-    {% endif %}
-        <div id="edit-form" style="display: none;">
-            <h3>Редактировать данные</h3>
-            <form id="profile-form" action="{% url 'profile' %}" method="post" enctype="multipart/form-data" novalidate="">
-                {% csrf_token %}
-			    <div class="form-group">
-                    <label for="avatar">Изменить аватар:</label>
-                    <input type="file" id="avatar" value="{{ user.picture }}" name="picture">
-				</div>
-                <div class="form-group">
-                    <label for="name">Имя:</label>
-                    <input type="text" id="name" name="name" value="{{ user.name }}" required="">
-                    <span class="error-message" id="name-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="phone">Номер телефона:</label>
-                    <input type="tel" id="phone" name="phone" value="{{ user.phone }}" required="" pattern="^\+7\d{10}$" placeholder="+71234567890">
-                    <span class="error-message" id="phone-error"></span>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_email">Email:</label>
-                    <input type="email" name="email" id="id_email" value="{{ user.email }}" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="date_of_birth">Дата рождения:</label>
-                    <input type="date" id="date_of_birth" name="birthday" value="{{ user.birthday }}" required="">
-                    <span class="error-message" id="dob-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="current_password">Текущий пароль:</label>
-                    <input type="password" id="current_password" name="current_password" required="">
-                    <span class="error-message" id="current-password-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="new_password">Новый пароль (если хотите изменить):</label>
-                    <input type="password" id="new_password" name="new_password">
-                    <span class="error-message" id="new-password-error"></span>
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirm_new_password">Повторите новый пароль:</label>
-                    <input type="password" id="confirm_new_password" name="confirm_new_password">
-                    <span class="error-message" id="confirm-new-password-error"></span>
-                </div>
-
-                {% if messages %}
-                <ul class="messages">
-                    {% for message in messages %}
-                        <li class="message {{ message.tags }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                <button type="submit" name="update_profile">Сохранить изменения</button><br>
-                <button type="button" id="cancel-button">Отмена</button>
-            </form>
-        </div>
-        <div class="centered-box">
+    <div class="centered-box">
         <h2>Мои записи</h2>
 
-                    <table class="table">
+        <table class="table">
                 <thead>
                     <tr>
                         <th>Услуга</th>
@@ -123,101 +57,28 @@
                         <td>ааа</td>
                     </tr>
                 </tbody>
-            </table>
-            </div>
+        </table>
     </div>
 
-    <script>
-        // Получение элементов
-        const editButton = document.getElementById('edit-button');
-        const cancelButton = document.getElementById('cancel-button');
-        const userInfo = document.getElementById('user-info');
-        const editForm = document.getElementById('edit-form');
-        const profileForm = document.getElementById('profile-form');
+    {% if review %}
+    <div class="button-container">
+        <a href="{% url 'review_update' review.pk %}">
+            <button class="button">Редактировать отзыв</button>
+        </a>
+    </div>
+    <div class="button-container">
+        <a href="{% url 'review_delete' review.pk %}">
+            <button class="button">Удалить отзыв</button>
+        </a>
+    </div>
+    {% else %}
+        <div class="button-container">
+            <a href="{% url 'review' user.pk %}">
+                <button id="review-button" class="button" style="text-align: center">Написать отзыв</button>
+            </a>
+        </div>
+    {% endif %}
 
-        // Обработчик нажатия на кнопку "Редактировать данные"
-        editButton.addEventListener('click', () => {
-            userInfo.style.display = 'none';
-            editForm.style.display = 'block';
-        });
-
-        // Обработчик нажатия на кнопку "Отмена"
-        cancelButton.addEventListener('click', () => {
-            editForm.style.display = 'none';
-            userInfo.style.display = 'block';
-            clearErrors();
-            profileForm.reset();
-        });
-
-        // Функция для очистки сообщений об ошибках
-        function clearErrors() {
-            const errorMessages = document.querySelectorAll('.error-message');
-            errorMessages.forEach(error => error.textContent = '');
-        }
-
-        // Валидация формы на клиентской стороне
-        profileForm.addEventListener('submit', function(event) {
-            clearErrors();
-            let isValid = true;
-
-            // Имя
-            const nameInput = document.getElementById('name');
-            if (nameInput.value.trim() === '') {
-                isValid = false;
-                document.getElementById('name-error').textContent = 'Имя обязательно.';
-            }
-
-            // Номер телефона
-            const phoneInput = document.getElementById('phone');
-            const phonePattern = /^\+7\d{10}$/;
-            if (!phonePattern.test(phoneInput.value.trim())) {
-                isValid = false;
-                document.getElementById('phone-error').textContent = 'Номер должен быть в формате +7XXXXXXXXXX.';
-            }
-
-            // Дата рождения
-            const dobInput = document.getElementById('date_of_birth');
-            if (!validateDate(dobInput.value)) {
-                isValid = false;
-                document.getElementById('dob-error').textContent = 'Введите корректную дату рождения.';
-            }
-
-            // Текущий пароль
-            const currentPasswordInput = document.getElementById('current_password');
-            if (currentPasswordInput.value.trim() === '') {
-                isValid = false;
-                document.getElementById('current-password-error').textContent = 'Текущий пароль обязателен.';
-            }
-
-            // Новый пароль и подтверждение
-            const newPasswordInput = document.getElementById('new_password');
-            const confirmNewPasswordInput = document.getElementById('confirm_new_password');
-
-            if (newPasswordInput.value !== '') {
-                if (newPasswordInput.value.length < 6) {
-                    isValid = false;
-                    document.getElementById('new-password-error').textContent = 'Новый пароль должен быть не менее 6 символов.';
-                }
-                if (newPasswordInput.value !== confirmNewPasswordInput.value) {
-                    isValid = false;
-                    document.getElementById('confirm-new-password-error').textContent = 'Пароли не совпадают.';
-                }
-            }
-
-            if (!isValid) {
-                event.preventDefault(); // Предотвращение отправки формы
-            }
-        });
-
-        // Функция для проверки корректности даты
-        function validateDate(dateString) {
-            const regex = /^\d{4}-\d{2}-\d{2}$/;
-            if(!regex.test(dateString)) return false;
-            const date = new Date(dateString);
-            const timestamp = date.getTime();
-            if(typeof timestamp !== 'number' || Number.isNaN(timestamp)) return false;
-            return date.toISOString().startsWith(dateString);
-        }
-    </script>
+</div>
 
 {% endblock %}

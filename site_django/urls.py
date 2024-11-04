@@ -29,8 +29,12 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('booking/', views.booking, name='booking'),
-    path('profile/', views.UserProfileView.as_view(), name='profile'),
+    path('profile/<int:pk>/', views.UserProfileView.as_view(), name='profile'),
+    path('profile/<int:pk>/edit/', views.EditProfileView.as_view(), name='edit_profile'),
     path('gallery/', views.gallery, name='gallery'),
+    path('profile/<int:pk>/review/', views.ReviewView.as_view(), name='review'),
+    path('profile/review/<int:pk>/delete/', views.DeleteReviewView.as_view(), name='review_delete'),
+    path('profile/review/<int:pk>/update/', views.UpdateReviewView.as_view(), name='review_update'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

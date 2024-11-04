@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Удаление отзыва{% endblock %}
+{% block css %}{% static 'css/review.css' %}{% endblock %}
+
+{% block content %}
+
+<div class="centered-box profile-container">
+    <div class="review-container">
+        <h3>Удалить отзыв</h3>
+        <p>Вы уверены, что хотите удалить этот отзыв? Это действие нельзя отменить.</p>
+
+        <div class="button-container" style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="submit-review-button" style="background-color: #e74c3c;">Да, удалить</button>
+            <a href="{% url 'profile' user.pk %}">
+                <button type="button" class="submit-review-button" style="background-color: #070707;">Отмена</button>
+            </a>
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
