@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Подтверждение отмены{% endblock %}
+{% block css %}{% static 'css/record.css' %}{% endblock %}
+{% block content %}
+
+<div class="centered-box">
+    <h2>Подтвердите отмену записи</h2>
+
+    <p>Вы уверены, что хотите отменить запись на услугу "{{ record.service }}" с мастером "{{ record.master }}"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="button">Да, отменить</button>
+    </form>
+
+    <a href="{% url 'profile' user.pk %}">
+        <button class="button">Вернуться в профиль</button>
+    </a>
+</div>
+
+{% endblock %}

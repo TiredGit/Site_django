@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Запись{% endblock %}
+{% block css %}{% static 'css/booking.css' %}{% endblock %}
+
+{% block content %}
+
+    <div id="booking-container">
+        <div class="tabs">
+            <button class="tab-button">Услуги</button>
+            <button class="tab-button active">Мастер</button>
+            <button class="tab-button">Время</button>
+        </div>
+
+
+        <!-- Вкладка Мастер -->
+        <div id="master-tab" class="tab-content">
+            <h3>Выберите мастера</h3>
+            <form method="get" class="filter-form">
+                {% csrf_token %}
+                <div>{{filter.form.name}}</div>
+                <button type="submit" class="filter-button">Применить фильтр</button>
+            </form>
+            <ul id="master-list" class="scrollable-list">
+                {% for master in masters %}
+                    <li class="master-item">
+                        <a href="{% url 'save_selected_master' master.id %}">
+                        {% if master.picture %}
+                        <img src="{{ master.picture.url }}" alt="{{ master.name }}" class="avatar"/>
+                        {% else %}
+                        <img src="{% static 'images/photo1.jpg' %}" alt="{{ master.name }}" class="avatar"/>
+                        {% endif %}
+                        <div class="master-info">
+                            <strong>{{ master.name }}</strong><br>
+                            {{ master.description }}
+                        </div>
+                        </a>
+                    </li>
+                {% empty %}
+                <br><li style="text-align: center">Мастера не найдены.</li><br>
+                {% endfor %}
+            </ul>
+
+            {% if selected_master %}
+                <p style="text-align: center">Вы выбрали мастера: {{ selected_master.name }}</p>
+            {% else %}
+                <p style="color: red; text-align: center;">Мастер не выбран!</p>
+            {% endif %}
+
+            <button id="master-next" class="next-button" {% if not selected_master %} disabled {% endif %}
+                onclick="location.href='{% url 'booking_date' %}'">Подтвердить выбор</button>
+            <button class="next-button" onclick="location.href='{% url 'booking_service' %}'">Назад</button>
+        </div>
+
+    </div>
+
+
+{% if show_modal %}
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <p>Чтобы получить доступ к этой странице, пожалуйста, зарегистрируйтесь или войдите в аккаунт.</p>
+        <a href="{% url 'login' %}" class="register-btn">Войти</a>
+    </div>
+</div>
+<script>
+    // Открываем модальное окно при загрузке страницы
+    window.onload = function() {
+        document.getElementById('auth-modal').style.display = 'block';
+    };
+</script>
+{% endif %}
+
+{% endblock %}

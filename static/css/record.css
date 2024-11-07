@@ -1,0 +1,50 @@
+/* Общий стиль для страницы подтверждения */
+.centered-box {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.centered-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.centered-box p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* Стиль для кнопок */
+.button {
+    background-color: #171717;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    margin: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Стиль для кнопки при наведении */
+.button:hover {
+    background-color: #2a2a2b;
+}
+
+/* Стиль для кнопки "Вернуться в профиль" */
+.button:last-child {
+    background-color: #171717;
+}
+
+.button:last-child:hover {
+    background-color: #302f2f;
+}

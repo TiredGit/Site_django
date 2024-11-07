@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Запись{% endblock %}
+{% block css %}{% static 'css/booking.css' %}{% endblock %}
+
+{% block content %}
+
+    <div id="booking-container">
+        <div class="tabs">
+            <button class="tab-button">Услуги</button>
+            <button class="tab-button">Мастер</button>
+            <button class="tab-button active">Время</button>
+        </div>
+
+        <div id="time-tab" class="tab-content" style="text-align: center">
+            <p id="selected-service-master"></p>
+            <p id="time-tab-message" style="color: red; text-align: center;"></p>
+
+
+            <div class="time-selection" style="text-align: center">
+                <h4>Выберите время:</h4>
+                    <ul>
+                        {% for schedule in schedules %}
+                            <li>
+                                <a href="{% url 'save_selected_schedule' schedule.id %}">
+                                    {{ schedule.date|date:"d-m-Y" }} - {{ schedule.time|date:"H:i" }}
+                                </a>
+                            </li>
+                        {% empty %}
+                        <p>Доступное время не найдено</p>
+                        {% endfor %}
+                    </ul>
+            </div>
+
+            {% if selected_schedule %}
+                <p style="text-align: center">Время записи: {{ selected_schedule.date|date:"d-m-Y" }} {{ selected_schedule.time|date:"H:i" }}</p>
+            {% else %}
+                <p style="color: red; text-align: center;">Время не выбрано!</p>
+            {% endif %}
+
+                <button id="book-btn" class="book-button" {% if not selected_schedule %}disabled{% endif %}
+                    onclick="location.href='{% url 'create_record' %}'">Записаться</button>
+                <button class="next-button" onclick="location.href='{% url 'booking_master' %}'">Назад</button>
+
+    </div>
+
+
+{% if show_modal %}
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <p>Чтобы получить доступ к этой странице, пожалуйста, зарегистрируйтесь или войдите в аккаунт.</p>
+        <a href="{% url 'login' %}" class="register-btn">Войти</a>
+    </div>
+</div>
+<script>
+    // Открываем модальное окно при загрузке страницы
+    window.onload = function() {
+        document.getElementById('auth-modal').style.display = 'block';
+    };
+</script>
+{% endif %}
+
+{% endblock %}

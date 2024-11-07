@@ -104,19 +104,17 @@ class Schedule(models.Model):
 
 class Record(models.Model):
     category = models.ForeignKey(Category, verbose_name='Категория',
-                                 related_name='records', on_delete=models.CASCADE)
+                                 related_name='records', on_delete=models.CASCADE, null=True)
     service = models.ForeignKey(Service, verbose_name='Услуга',
                                 related_name='records', on_delete=models.CASCADE)
     master = models.ForeignKey(Master, verbose_name='Мастер',
                                related_name='records', on_delete=models.CASCADE)
     datetime = models.ForeignKey(Schedule, verbose_name='Дата и время',
                                  related_name='records', on_delete=models.SET_NULL, null=True)
-    info = models.TextField(verbose_name='Доп. информация', blank=True, null=True)
+    user = models.ForeignKey(MyUser, verbose_name='Пользователь',
+                             related_name='records', on_delete=models.CASCADE, null=True)
 
     class Meta:
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
         ordering = ['datetime']
-
-    def __str__(self):
-        return self.info

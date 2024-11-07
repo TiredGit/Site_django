@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Запись{% endblock %}
+{% block css %}{% static 'css/booking.css' %}{% endblock %}
+
+{% block content %}
+
+    <div id="booking-container">
+        <div class="tabs">
+            <button class="tab-button active">Услуги</button>
+            <button class="tab-button">Мастер</button>
+            <button class="tab-button">Время</button>
+        </div>
+
+        <!-- Вкладка Услуги -->
+        <div id="services-tab" class="tab-content active">
+            <div class="service-category">
+                <div class="categories">
+                    <h3>Разделы услуг</h3>
+                    <ul>
+                        {% for category in categories %}
+                        <li>
+                            <a href="?category={{ category.id }}" class="category-link"
+                               style="text-decoration: none; color: black">{{ category.name }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="services-list">
+                    <h3>Услуги</h3>
+                    <div id="services-details" class="scrollable-list">
+                        {% for service in services %}
+                        <p class="service-item">
+                            <a href="{% url 'save_selected_service' service.id %}">
+                                {{ service.name }} - {{ service.price }} руб.
+                            </a>
+                        </p>
+                        {% empty %}
+                        <p>Услуги для данной категории отсутствуют.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if selected_service %}
+            <p style="text-align: center">Вы выбрали услугу: {{ selected_service.name }}</p>
+        {% else %}
+            <p style="color: red; text-align: center;">Услуга не выбрана!</p>
+        {% endif %}
+
+        <button id="services-next" class="next-button" {% if not selected_service %} disabled {% endif %}
+                onclick="location.href='{% url 'booking_master' %}'">Подтвердить выбор</button>
+
+    </div>
+
+{% if show_modal %}
+<div id="auth-modal" class="modal">
+    <div class="modal-content">
+        <p>Чтобы получить доступ к этой странице, пожалуйста, зарегистрируйтесь или войдите в аккаунт.</p>
+        <a href="{% url 'login' %}" class="register-btn">Войти</a>
+    </div>
+</div>
+<script>
+    // Открываем модальное окно при загрузке страницы
+    window.onload = function() {
+        document.getElementById('auth-modal').style.display = 'block';
+    };
+</script>
+{% endif %}
+
+{% endblock %}

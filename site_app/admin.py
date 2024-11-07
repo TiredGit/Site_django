@@ -25,3 +25,12 @@ class MasterAdmin(admin.ModelAdmin):
 @admin.register(models.Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('user', 'grade')
+
+@admin.register(models.Schedule)
+class ScheduleAdmin(admin.ModelAdmin):
+    list_display = ('date', 'time')
+
+
+@admin.register(models.Record)
+class RecordAdmin(admin.ModelAdmin):
+    list_display = ('id',)

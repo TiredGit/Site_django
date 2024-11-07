@@ -2,11 +2,10 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView, DetailView, ListView, TemplateView, CreateView, DeleteView
 
 from django_filters.views import FilterView
-from site_app.filters import MasterFilter
+from site_app.filters import MasterFilter, ServiceFilter, MasterSearchFilter
 
 from site_app import models
 
@@ -151,13 +150,193 @@ def logout(request):
     return redirect('login')
 
 
-def booking(request):
-    user = None
-    if 'user_id' in request.session:
-        user = models.MyUser.objects.get(id=request.session['user_id'])
-        return render(request, 'booking.html', {'user': user, 'show_modal': False})
-    else:
-        return render(request, 'booking.html', {'user': user, 'show_modal': True})
+class BookingServiceView(FilterView):
+    model = models.Service
+    template_name = 'booking_service.html'
+    context_object_name = 'services'
+    filterset_class = ServiceFilter
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = None
+        context['show_modal'] = True
+        if 'user_id' in self.request.session:
+            user = models.MyUser.objects.get(id=self.request.session['user_id'])
+            context['show_modal'] = False
+        context['user'] = user
+
+        context['categories'] = models.Category.objects.all()
+
+        selected_service_id = self.request.session.get('selected_service_id')
+        if selected_service_id:
+            selected_service = models.Service.objects.get(id=selected_service_id)
+            context['selected_service'] = selected_service
+        else:
+            context['selected_service'] = None
+        return context
+
+def save_selected_service(request, service_id):
+    # Сохраняем выбранную услугу в сессии
+    request.session['selected_service_id'] = service_id
+    request.session['selected_master_id'] = None
+    request.session['selected_schedule_id'] = None
+    # Перенаправляем на следующую страницу, например, на выбор мастера
+    return redirect('booking_service')
+
+
+class BookingMasterView(FilterView):
+    model = models.Master
+    template_name = 'booking_master.html'
+    context_object_name = 'masters'
+    filterset_class = MasterSearchFilter
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        selected_service_id = self.request.session.get('selected_service_id')
+        selected_service = models.Service.objects.get(id=selected_service_id)
+        category_id = selected_service.category.id
+        queryset = queryset.filter(category__id=category_id)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = None
+        context['show_modal'] = True
+        if 'user_id' in self.request.session:
+            user = models.MyUser.objects.get(id=self.request.session['user_id'])
+            context['show_modal'] = False
+        context['user'] = user
+
+        selected_master_id = self.request.session.get('selected_master_id')
+        if selected_master_id:
+            selected_master = models.Master.objects.get(id=selected_master_id)
+            context['selected_master'] = selected_master
+        else:
+            context['selected_master'] = None
+
+        return context
+
+def save_selected_master(request, master_id):
+    request.session['selected_master_id'] = master_id
+    request.session['selected_schedule_id'] = None
+    return redirect('booking_master')
+
+
+class BookingDateView(ListView):
+    model = models.Schedule
+    template_name = 'booking_date.html'
+    context_object_name = 'schedules'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = None
+        context['show_modal'] = True
+        if 'user_id' in self.request.session:
+            user = models.MyUser.objects.get(id=self.request.session['user_id'])
+            context['show_modal'] = False
+        context['user'] = user
+
+        selected_master_id = self.request.session.get('selected_master_id')
+        if selected_master_id:
+            schedules = models.Schedule.objects.filter(master=selected_master_id)
+        else:
+            schedules = None
+
+        used_schedule_ids = models.Record.objects.values_list('datetime', flat=True)
+        schedules = schedules.exclude(id__in=used_schedule_ids)
+        context['schedules'] = schedules
+
+        selected_schedule_id = self.request.session.get('selected_schedule_id')
+        if selected_schedule_id:
+            selected_schedule = models.Schedule.objects.get(id=selected_schedule_id)
+            context['selected_schedule'] = selected_schedule
+        else:
+            context['selected_schedule'] = None
+
+
+        return context
+
+def save_selected_schedule(request, schedule_id):
+    request.session['selected_schedule_id'] = schedule_id
+    return redirect('booking_date')
+
+
+def create_record(request):
+    try:
+        selected_schedule_id = request.session.get('selected_schedule_id')
+        selected_master_id = request.session.get('selected_master_id')
+        selected_service_id = request.session.get('selected_service_id')
+        user_id = request.session.get('user_id')
+
+        if not all([selected_schedule_id, selected_master_id, selected_service_id, user_id]):
+            raise ValueError("Missing session data")
+
+        # Извлекаем объекты из базы данных
+        schedule = models.Schedule.objects.get(id=selected_schedule_id)
+        master = models.Master.objects.get(id=selected_master_id)
+        service = models.Service.objects.get(id=selected_service_id)
+        user = models.MyUser.objects.get(id=user_id)
+        category = service.category
+
+        # Создаем новую запись
+        record = models.Record.objects.create(
+            category=category,
+            service=service,
+            master=master,
+            datetime=schedule,
+            user=user
+        )
+
+        if user.email:
+            send_mail(
+                "Подтверждение записи",
+                f"Здравствуйте, {user.name}!\n\nВы успешно записаны на {record.service}"
+                        f" с мастером {record.master} на дату {record.datetime.date} в {record.datetime.time}.",
+                settings.EMAIL_HOST_USER,
+                [user.email],
+                fail_silently=False,
+            )
+
+        request.session['selected_service_id'] = None
+        request.session['selected_master_id'] = None
+        request.session['selected_schedule_id'] = None
+        return redirect('profile', pk=user.id)
+    except:
+        return redirect('booking_time')
+
+
+class RecordDeleteView(DeleteView):
+    model = models.Record
+    template_name = 'record_delete.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        user = None
+        if 'user_id' in self.request.session:
+            user = models.MyUser.objects.get(id=self.request.session['user_id'])
+        context['user'] = user
+        context['record'] = models.Record.objects.get(id=self.kwargs['pk'])
+
+        return context
+
+    def get_success_url(self):
+        if self.object.user.email:
+            send_mail(
+                "Запись отменена",
+                f"Здравствуйте, {self.object.user.name}!\n\nВаша запись на {self.object.service}"
+                f" с мастером {self.object.master} на {self.object.datetime.date} в {self.object.datetime.time} была отменена.",
+                settings.DEFAULT_FROM_EMAIL,
+                [self.object.user.email],
+                fail_silently=False,
+            )
+        return reverse_lazy('profile', kwargs={'pk': self.object.user.pk})
+
 
 class UserProfileView(DetailView):
     model = models.MyUser
@@ -174,6 +353,8 @@ class UserProfileView(DetailView):
 
         review = models.Review.objects.filter(user=user).first()
         context['review'] = review
+
+        context['records'] = models.Record.objects.filter(user=user)
 
         return context
 

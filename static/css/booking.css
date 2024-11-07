@@ -39,7 +39,7 @@
 }
 
 .tab-content {
-    display: none;
+    display: block;
     padding: 20px;
     border-radius: 10px;
 }
@@ -180,6 +180,92 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+ul li {
+    position: relative;
+    list-style: none;
+}
+
+ul li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+p a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.master-item:active {
+    background-color: #d0d0d0; /* Цвет при нажатии */
+}
+
+.service-item:active {
+    background-color: #d0d0d0; /* Цвет при нажатии */
+}
+
+
+.filter-form {
+            display: flex;
+            align-items: center;
+            width: 100%; /* Растягиваем форму на всю ширину */
+            gap: 10px; /* Расстояние между полем ввода и кнопкой */
+        }
+
+        .filter-form input {
+            flex: 1; /* Растягиваем поле ввода на всю доступную ширину */
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 300px; /* Растягиваем input по доступной ширине */
+        }
+
+        .filter-form button {
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: #0e0e0e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            min-width: 100px; /* Минимальная ширина кнопки */
+        }
+
+        .filter-form button:hover {
+            background-color: #1e1e1e;
+        }
+
+.time-selection {
+    width: 45%;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+.time-selection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.time-selection ul li {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.time-selection ul li:hover {
+    background-color: #f1f1f1;
+}
 
 
 /* Стили для модального окна */

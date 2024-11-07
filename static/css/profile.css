@@ -327,3 +327,19 @@ ul.messages {
     padding: 0;
     text-align: center;
 }
+
+/* Стиль для маленькой кнопки */
+.small-button {
+    font-size: 12px;  /* уменьшение шрифта */
+    padding: 5px 5px; /* уменьшение отступов */
+    background-color: #131313;  /* темный фон */
+    border-radius: 3px;  /* более округленные углы */
+    margin: 0;
+    text-decoration: none;
+    color: white;
+}
+
+/* Стиль для кнопки при наведении */
+.small-button:hover {
+    background-color: #3e3e3e;
+}
