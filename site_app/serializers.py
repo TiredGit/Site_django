@@ -32,12 +32,17 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    master = MasterSerializer(read_only=True)
     class Meta:
         model = models.Schedule
         fields = '__all__'
 
 
 class RecordSerializer(serializers.ModelSerializer):
+    user = MyUserSerializer(read_only=True)
+    service = ServiceSerializer(read_only=True)
+    master = MasterSerializer(read_only=True)
+    schedule = ScheduleSerializer(read_only=True)
     class Meta:
         model = models.Record
         fields = '__all__'

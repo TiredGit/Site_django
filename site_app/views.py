@@ -61,7 +61,6 @@ class MainView(FilterView):
     filterset_class = MasterFilter
 
     def get_filterset(self, filterset_class):
-        # Получаем выбранную категорию из параметров запроса
         category_id = self.request.GET.get('category')
         self.queryset = models.Master.objects.all()
         if category_id:
@@ -185,7 +184,7 @@ def register(request):
 
 
 def logout(request):
-    request.session.flush()  # Удаляем данные сессии
+    request.session.flush()
     return redirect('login')
 
 
@@ -216,11 +215,9 @@ class BookingServiceView(FilterView):
         return context
 
 def save_selected_service(request, service_id):
-    # Сохраняем выбранную услугу в сессии
     request.session['selected_service_id'] = service_id
     request.session['selected_master_id'] = None
     request.session['selected_schedule_id'] = None
-    # Перенаправляем на следующую страницу, например, на выбор мастера
     return redirect('booking_service')
 
 
@@ -315,14 +312,12 @@ def create_record(request):
         if not all([selected_schedule_id, selected_master_id, selected_service_id, user_id]):
             raise ValueError("Missing session data")
 
-        # Извлекаем объекты из базы данных
         schedule = models.Schedule.objects.get(id=selected_schedule_id)
         master = models.Master.objects.get(id=selected_master_id)
         service = models.Service.objects.get(id=selected_service_id)
         user = models.MyUser.objects.get(id=user_id)
         category = service.category
 
-        # Создаем новую запись
         record = models.Record.objects.create(
             category=category,
             service=service,
