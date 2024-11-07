@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, DetailView, ListView, TemplateView, CreateView, DeleteView
+from django.views.generic import UpdateView, DetailView, ListView, CreateView, DeleteView
 
 from django_filters.views import FilterView
 from site_app.filters import MasterFilter, ServiceFilter, MasterSearchFilter
@@ -294,7 +294,6 @@ class BookingDateView(ListView):
         else:
             context['selected_schedule'] = None
 
-
         return context
 
 def save_selected_schedule(request, schedule_id):
@@ -364,7 +363,8 @@ class RecordDeleteView(DeleteView):
             send_mail(
                 "Запись отменена",
                 f"Здравствуйте, {self.object.user.name}!\n\nВаша запись на {self.object.service}"
-                f" с мастером {self.object.master} на {self.object.datetime.date} в {self.object.datetime.time} была отменена.",
+                f" с мастером {self.object.master} на {self.object.datetime.date} в {self.object.datetime.time}"
+                f" была отменена.",
                 settings.DEFAULT_FROM_EMAIL,
                 [self.object.user.email],
                 fail_silently=False,
