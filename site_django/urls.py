@@ -1,19 +1,3 @@
-"""
-URL configuration for site_django project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from site_app import views
@@ -21,9 +5,24 @@ from site_app import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+from rest_framework.routers import DefaultRouter
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
+
+router = DefaultRouter()
+router.register('users', views.MyUserAPI, basename='users')
+router.register('categories', views.CategoryAPI, basename='categories')
+router.register('services', views.ServiceAPI, basename='services')
+router.register('masters', views.MasterAPI, basename='masters')
+router.register('reviews', views.ReviewAPI, basename='reviews')
+router.register('schedules', views.ScheduleAPI, basename='schedules')
+router.register('record', views.RecordAPI, basename='records')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.MainView.as_view(), name='main'),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('swagger/', SpectacularSwaggerView.as_view(url_name='schema')),
+    path('main/', views.MainView.as_view(), name='main'),
     path('category/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
@@ -42,7 +41,7 @@ urlpatterns = [
     path('profile/<int:pk>/review/', views.ReviewView.as_view(), name='review'),
     path('profile/review/<int:pk>/delete/', views.DeleteReviewView.as_view(), name='review_delete'),
     path('profile/review/<int:pk>/update/', views.UpdateReviewView.as_view(), name='review_update'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + router.urls
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

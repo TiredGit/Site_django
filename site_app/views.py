@@ -14,6 +14,45 @@ import re
 from django.core.mail import send_mail
 from django.conf import settings
 
+from rest_framework import viewsets
+from site_app import serializers
+
+class MyUserAPI(viewsets.ModelViewSet):
+    queryset = models.MyUser.objects.all()
+    serializer_class = serializers.MyUserSerializer
+
+
+class CategoryAPI(viewsets.ModelViewSet):
+    queryset = models.Category.objects.all()
+    serializer_class = serializers.CategorySerializer
+
+
+class ServiceAPI(viewsets.ModelViewSet):
+    queryset = models.Service.objects.all()
+    serializer_class = serializers.ServiceSerializer
+
+
+class MasterAPI(viewsets.ModelViewSet):
+    queryset = models.Master.objects.all()
+    serializer_class = serializers.MasterSerializer
+
+
+class ReviewAPI(viewsets.ModelViewSet):
+    queryset = models.Review.objects.all()
+    serializer_class = serializers.ReviewSerializer
+
+
+class ScheduleAPI(viewsets.ModelViewSet):
+    queryset = models.Schedule.objects.all()
+    serializer_class = serializers.ScheduleSerializer
+
+
+class RecordAPI(viewsets.ModelViewSet):
+    queryset = models.Record.objects.all()
+    serializer_class = serializers.RecordSerializer
+
+
+
 
 class MainView(FilterView):
     model = models.Master
