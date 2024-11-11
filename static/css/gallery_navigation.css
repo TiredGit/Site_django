@@ -1,0 +1,136 @@
+.sidebar {
+    flex: 1;
+    background-color: #f4f4f4;
+    padding: 1rem;
+    max-width: 250px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: hidden;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 1rem 0;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.sidebar a:hover {
+    color: #007bff;
+}
+
+.gallery-frame {
+    flex: 3;
+    border: none;
+    height: 100vh;
+    width: 100%;
+}
+
+
+.centered-box {
+    display: flex;
+    width: 95%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 1); /* полупрозрачный фон */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* более выраженная тень */
+    border-radius: 15px;
+    overflow: hidden; /* для корректного отображения содержимого */
+}
+
+/* navigation.css */
+
+/* Правый фрейм для галереи */
+.gallery-frame {
+    width: 75%;
+    border: none;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Кнопка закрытия навигации */
+.close-nav-button {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #151515;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.close-nav-button:hover {
+    background-color: #222121;
+}
+
+
+/* Кнопка открытия навигации в контейнере с тенью */
+.open-nav-container {
+    position: absolute;
+    top: 5%; /* Позиционирование кнопки */
+    left: 12%;
+    transform: translateX(-50%);
+}
+
+.open-nav-container button {
+    background-color: #ffffff;
+    color: #0e0e0e;
+    border: none;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.open-nav-container button:hover {
+    background-color: #8a8c8a;
+}
+
+
+/* Стили для модального окна */
+#modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+#modal-img {
+    display: block;
+    margin: auto;
+    margin-top: 5%;
+    max-width: 60%;
+    max-height: 75%;
+    object-fit: contain; /* Сохраняет пропорции изображения */
+}
+
+/* Добавляем стиль для текста внизу (если нужно) */
+#caption {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 15px;
+    font-family: Arial, sans-serif;
+}

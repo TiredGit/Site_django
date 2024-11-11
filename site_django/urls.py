@@ -38,6 +38,7 @@ urlpatterns = [
     path('profile/<int:pk>/', views.UserProfileView.as_view(), name='profile'),
     path('profile/<int:pk>/edit/', views.EditProfileView.as_view(), name='edit_profile'),
     path('gallery/', views.gallery, name='gallery'),
+    path('gallery_navigation/', views.gallery_navigation, name='gallery_navigation'),
     path('profile/<int:pk>/review/', views.ReviewView.as_view(), name='review'),
     path('profile/review/<int:pk>/delete/', views.DeleteReviewView.as_view(), name='review_delete'),
     path('profile/review/<int:pk>/update/', views.UpdateReviewView.as_view(), name='review_update'),

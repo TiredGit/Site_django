@@ -17,7 +17,7 @@
         <nav>
             <a href="{% url 'booking_service' %}"><img src="{% static 'images/nav1.png' %}" alt="-">Записаться</a>
             <a href="{% url 'main' %}#services"><img src="{% static 'images/nav2.png' %}" alt="-">Услуги</a>
-            <a href="{% url 'gallery' %}"><img src="{% static 'images/nav3.png' %}" alt="-">Галерея</a>
+            <a href="{% url 'gallery_navigation' %}"><img src="{% static 'images/nav3.png' %}" alt="-">Галерея</a>
             <a href="{% url 'main' %}#map"><img src="{% static 'images/nav4.png' %}" alt="-">Контакты</a>
             {% if user %}
                 <div class="user-menu">

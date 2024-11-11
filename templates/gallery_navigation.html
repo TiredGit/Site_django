@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Галерея{% endblock %}
+{% block css %}{% static 'css/gallery_navigation.css' %}{% endblock %}
+
+{% block content %}
+
+<div id="open-nav-container" class="open-nav-container">
+    <button onclick="toggleNavigation()" class="close-nav-button">Открыть/Закрыть навигацию</button>
+</div>
+
+<div class="centered-box">
+    <nav class="sidebar" id="sidebar">
+        <h2>Категории</h2>
+        <ul>
+            <li><a href="{% url 'gallery' %}#haircuts" target="galleryFrame">Стрижка</a></li>
+            <li><a href="{% url 'gallery' %}#hair-coloring" target="galleryFrame">Окрашивание</a></li>
+            <li><a href="{% url 'gallery' %}#manicure" target="galleryFrame">Маникюр</a></li>
+            <li><a href="{% url 'gallery' %}#pedicure" target="galleryFrame">Педикюр</a></li>
+            <li><a href="{% url 'gallery' %}#massage" target="galleryFrame">Массаж</a></li>
+            <li><a href="{% url 'gallery' %}#skin-care" target="galleryFrame">Уход за кожей</a></li>
+        </ul>
+        <button onclick="toggleNavigation()" class="close-nav-button">Закрыть навигацию</button>
+    </nav>
+
+    <iframe name="galleryFrame" src="{% url 'gallery' %}#haircuts" class="gallery-frame" scrolling="no"></iframe>
+</div>
+
+<div id="modal" onclick="closeModal()">
+    <img id="modal-img" class="modal-content" alt="">
+    <div id="caption"></div>
+</div>
+
+
+<script src="{% static 'js/gallery.js' %}"></script>
+
+{% endblock %}

@@ -17,6 +17,7 @@ from django.conf import settings
 from rest_framework import viewsets
 from site_app import serializers
 
+
 class MyUserAPI(viewsets.ModelViewSet):
     queryset = models.MyUser.objects.all()
     serializer_class = serializers.MyUserSerializer
@@ -50,8 +51,6 @@ class ScheduleAPI(viewsets.ModelViewSet):
 class RecordAPI(viewsets.ModelViewSet):
     queryset = models.Record.objects.all()
     serializer_class = serializers.RecordSerializer
-
-
 
 
 class MainView(FilterView):
@@ -161,9 +160,10 @@ def register(request):
         else:
             email = None
 
-        hashed_password=make_password(password1)
+        hashed_password = make_password(password1)
 
-        user = models.MyUser.objects.create(name=name, phone=phone, password=hashed_password, birthday=birthday, email=email)
+        user = models.MyUser.objects.create(name=name, phone=phone, password=hashed_password, birthday=birthday,
+                                            email=email)
 
         request.session['user_id'] = user.id
         request.session['user_name'] = user.name
@@ -214,6 +214,7 @@ class BookingServiceView(FilterView):
             context['selected_service'] = None
         return context
 
+
 def save_selected_service(request, service_id):
     request.session['selected_service_id'] = service_id
     request.session['selected_master_id'] = None
@@ -256,6 +257,7 @@ class BookingMasterView(FilterView):
 
         return context
 
+
 def save_selected_master(request, master_id):
     request.session['selected_master_id'] = master_id
     request.session['selected_schedule_id'] = None
@@ -296,6 +298,7 @@ class BookingDateView(ListView):
 
         return context
 
+
 def save_selected_schedule(request, schedule_id):
     request.session['selected_schedule_id'] = schedule_id
     return redirect('booking_date')
@@ -329,7 +332,7 @@ def create_record(request):
             send_mail(
                 "Подтверждение записи",
                 f"Здравствуйте, {user.name}!\n\nВы успешно записаны на {record.service}"
-                        f" с мастером {record.master} на дату {record.datetime.date} в {record.datetime.time}.",
+                f" с мастером {record.master} на дату {record.datetime.date} в {record.datetime.time}.",
                 settings.EMAIL_HOST_USER,
                 [user.email],
                 fail_silently=False,
@@ -537,3 +540,10 @@ def gallery(request):
     if 'user_id' in request.session:
         user = models.MyUser.objects.get(id=request.session['user_id'])
     return render(request, 'gallery.html', {'user': user})
+
+
+def gallery_navigation(request):
+    user = None
+    if 'user_id' in request.session:
+        user = models.MyUser.objects.get(id=request.session['user_id'])
+    return render(request, 'gallery_navigation.html', {'user': user})

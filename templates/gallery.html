@@ -1,21 +1,25 @@
-{% extends "base.html" %}
 {% load static %}
-{% block title %}Галерея{% endblock %}
-{% block css %}{% static 'css/gallery.css' %}{% endblock %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея</title>
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+</head>
+<body>
 
-{% block content %}
-
-<div class="centered-box">
+<div class="galleryFrame">
         <h1>Галерея</h1>
         <section id="haircuts">
             <div class="h2-wrapper">
                 <h2>Профессиональная стрижка для любого типа волос</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image1.jpg' %}" alt="Каре" onclick="openModal(this)">
-                <img src="{% static 'gallery/image2.jpg' %}" alt="Каскад" onclick="openModal(this)">
-                <img src="{% static 'gallery/image3.jpg' %}" alt="Лесенка" onclick="openModal(this)">
-                <img src="{% static 'gallery/image4.jpg' %}" alt="Лисий хвост" onclick="openModal(this)">
+                <img src="{% static 'gallery/image1.jpg' %}" alt="Каре" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image2.jpg' %}" alt="Каскад" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image3.jpg' %}" alt="Лесенка" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image4.jpg' %}" alt="Лисий хвост" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -24,10 +28,10 @@
                 <h2>Окрашивание волос</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image5.jpg' %}" alt="Однотонное окрашивание" onclick="openModal(this)">
-                <img src="{% static 'gallery/image6.jpg' %}" alt="Мелирование" onclick="openModal(this)">
-                <img src="{% static 'gallery/image7.jpg' %}" alt="Скрытое окрашивание" onclick="openModal(this)">
-                <img src="{% static 'gallery/image8.jpg' %}" alt="Тонирование" onclick="openModal(this)">
+                <img src="{% static 'gallery/image5.jpg' %}" alt="Однотонное окрашивание" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image6.jpg' %}" alt="Мелирование" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image7.jpg' %}" alt="Скрытое окрашивание" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image8.jpg' %}" alt="Тонирование" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -36,10 +40,10 @@
                 <h2>Стильный маникюр</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image9.jpg' %}" alt="Классический маникюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image10.jpg' %}" alt="Аппаратный маникюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image11.jpg' %}" alt="Френч-маникюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image12.jpg' %}" alt="Наращивание ногтей" onclick="openModal(this)">
+                <img src="{% static 'gallery/image9.jpg' %}" alt="Классический маникюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image10.jpg' %}" alt="Аппаратный маникюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image11.jpg' %}" alt="Френч-маникюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image12.jpg' %}" alt="Наращивание ногтей" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -48,10 +52,10 @@
                 <h2>Качественный педикюр</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image14.jpg' %}" alt="SPA-педикюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image15.jpg' %}" alt="Классический педикюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image16.jpg' %}" alt="Медицинский педикюр" onclick="openModal(this)">
-                <img src="{% static 'gallery/image17.jpg' %}" alt="Косметический педикюр" onclick="openModal(this)">
+                <img src="{% static 'gallery/image14.jpg' %}" alt="SPA-педикюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image15.jpg' %}" alt="Классический педикюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image16.jpg' %}" alt="Медицинский педикюр" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image17.jpg' %}" alt="Косметический педикюр" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -60,10 +64,10 @@
                 <h2>Расслабляющий массаж</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image18.jpg' %}" alt="Массаж горячими камнями" onclick="openModal(this)">
-                <img src="{% static 'gallery/image19.jpg' %}" alt="Классический массаж" onclick="openModal(this)">
-                <img src="{% static 'gallery/image20.jpg' %}" alt="Ароматерапевтический массаж" onclick="openModal(this)">
-                <img src="{% static 'gallery/image21.jpg' %}" alt="Тайский массаж" onclick="openModal(this)">
+                <img src="{% static 'gallery/image18.jpg' %}" alt="Массаж горячими камнями" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image19.jpg' %}" alt="Классический массаж" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image20.jpg' %}" alt="Ароматерапевтический массаж" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image21.jpg' %}" alt="Тайский массаж" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -72,10 +76,10 @@
                 <h2>Комплексные процедуры для ухода за кожей лица</h2>
             </div>
             <div class="gallery">
-                <img src="{% static 'gallery/image22.jpg' %}" alt="Чистка лица" onclick="openModal(this)">
-                <img src="{% static 'gallery/image23.jpg' %}" alt="Пилинг" onclick="openModal(this)">
-                <img src="{% static 'gallery/image24.jpg' %}" alt="Увлажняющие процедуры" onclick="openModal(this)">
-                <img src="{% static 'gallery/image25.jpg' %}" alt="Лифтинг-процедуры" onclick="openModal(this)">
+                <img src="{% static 'gallery/image22.jpg' %}" alt="Чистка лица" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image23.jpg' %}" alt="Пилинг" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image24.jpg' %}" alt="Увлажняющие процедуры" onclick="openImageFullscreen(this)">
+                <img src="{% static 'gallery/image25.jpg' %}" alt="Лифтинг-процедуры" onclick="openImageFullscreen(this)">
             </div>
         </section>
 
@@ -88,4 +92,5 @@
 
 <script src="{% static 'js/gallery.js' %}"></script>
 
-{% endblock %}
+</body>
+</html>

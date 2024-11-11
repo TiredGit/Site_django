@@ -141,3 +141,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'beutystyleufa@gmail.com'
 EMAIL_HOST_PASSWORD = 'szfx bssl jzdo iejd'
+
+X_FRAME_OPTIONS = 'ALLOWALL'
