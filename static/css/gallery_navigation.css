@@ -65,40 +65,17 @@
 /* Кнопка закрытия навигации */
 .close-nav-button {
     display: block;
-    margin-bottom: 10px;
-    padding: 10px;
+    margin: auto;
+    padding: 12px;
     background-color: #151515;
     color: #fff;
-    border: none;
+    border: 5px;
+    font-size: 15px;
     cursor: pointer;
 }
 
 .close-nav-button:hover {
     background-color: #222121;
-}
-
-
-/* Кнопка открытия навигации в контейнере с тенью */
-.open-nav-container {
-    position: absolute;
-    top: 5%; /* Позиционирование кнопки */
-    left: 12%;
-    transform: translateX(-50%);
-}
-
-.open-nav-container button {
-    background-color: #ffffff;
-    color: #0e0e0e;
-    border: none;
-    padding: 15px 30px;
-    font-size: 16px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-}
-
-.open-nav-container button:hover {
-    background-color: #8a8c8a;
 }
 
 

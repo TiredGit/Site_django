@@ -18,22 +18,33 @@ function sendHeightToParent() {
     // Отправляем высоту при изменении размеров окна, если контент изменяется динамически
     window.addEventListener('resize', sendHeightToParent);
 
-    function toggleNavigation() {
-        const navFrame = document.getElementById('sidebar');
-        const galleryFrame = document.getElementById('gallery-frame');
-        const button = document.getElementById('open-nav-container')
+    // Определяем функцию toggleNavigation для переключения состояния навигации
+function toggleNavigation() {
+    const navFrame = document.getElementById('sidebar');
+    const galleryFrame = document.querySelector('.gallery-frame');
 
-        // Переключаем видимость навигации и галереи на весь экран
-        if (navFrame.style.display === 'none') {
+    if (navFrame && galleryFrame) {
+        if (navFrame.style.display === 'none' || navFrame.style.display === '') {
             navFrame.style.display = 'block';
-            galleryFrame.style.width = '75%'; // Оригинальная ширина галереи
-            button.style.display = 'block'
+            galleryFrame.style.width = '75%';
+            window.frames['galleryFrame'].postMessage('navOpened', '*'); // Отправить сообщение о том, что навигация открыта
         } else {
             navFrame.style.display = 'none';
-            galleryFrame.style.width = '100%'; // Галерея на весь экран
-            button.style.display = 'none'
+            galleryFrame.style.width = '100%';
+            window.frames['galleryFrame'].postMessage('navClosed', '*'); // Отправить сообщение о том, что навигация закрыта
         }
+    } else {
+        console.error("Не удалось найти элементы с ID 'sidebar' или 'gallery-frame'");
     }
+}
+
+    // Обработчик сообщений из фрейма с галереей
+window.addEventListener('message', function(event) {
+    if (event.data === 'toggleNavigation') {
+        toggleNavigation(); // Вызов функции переключения навигации
+    }
+});
+
 
     window.addEventListener('message', function(event) {
         // Проверяем, что полученное значение — это высота

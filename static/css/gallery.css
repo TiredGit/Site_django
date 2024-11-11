@@ -53,3 +53,21 @@ h1 {
 .gallery img:hover {
     transform: scale(1.05);
 }
+
+#openNavButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: none; /* Изначально скрыта */
+            background-color: black;
+            color: white;
+            border: 5px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+#openNavButton:hover {
+    background-color: #1e1e1e;
+}

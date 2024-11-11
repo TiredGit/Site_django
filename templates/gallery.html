@@ -10,6 +10,7 @@
 <body>
 
 <div class="galleryFrame">
+    <button id="openNavButton" onclick="requestToggleNavigation()">Открыть навигацию</button>
         <h1>Галерея</h1>
         <section id="haircuts">
             <div class="h2-wrapper">
@@ -91,6 +92,21 @@
 </div>
 
 <script src="{% static 'js/gallery.js' %}"></script>
+<script>
+    // Функция для отправки запроса на переключение навигации в родительский фрейм
+    function requestToggleNavigation() {
+        window.parent.postMessage('toggleNavigation', '*');
+    }
+
+    // Обработчик получения сообщений от основного фрейма
+    window.addEventListener('message', function(event) {
+        if (event.data === 'navClosed') {
+            document.getElementById('openNavButton').style.display = 'block'; // Показать кнопку
+        } else if (event.data === 'navOpened') {
+            document.getElementById('openNavButton').style.display = 'none'; // Скрыть кнопку
+        }
+    });
+</script>
 
 </body>
 </html>
