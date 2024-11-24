@@ -31,7 +31,7 @@
                     <div id="services-details" class="scrollable-list">
                         {% for service in services %}
                         <p class="service-item">
-                            <a href="{% url 'save_selected_service' service.id %}">
+                            <a href="{% url 'save_selected_service' service.id %}?category={{ service.category.id }}">
                                 {{ service.name }} - {{ service.price }} руб.
                             </a>
                         </p>

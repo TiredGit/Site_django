@@ -17,6 +17,9 @@ from django.conf import settings
 from rest_framework import viewsets
 from site_app import serializers
 
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 class MyUserAPI(viewsets.ModelViewSet):
     queryset = models.MyUser.objects.all()
@@ -194,6 +197,15 @@ class BookingServiceView(FilterView):
     context_object_name = 'services'
     filterset_class = ServiceFilter
 
+    def get_filterset(self, filterset_class):
+        # Проверяем, есть ли выбранная категория
+        query_params = self.request.GET.copy()
+        if 'category' not in query_params:
+            first_category = models.Category.objects.first()
+            if first_category:
+                query_params['category'] = first_category.id  # Устанавливаем первую категорию по умолчанию
+        return filterset_class(query_params, queryset=self.get_queryset())
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -212,6 +224,14 @@ class BookingServiceView(FilterView):
             context['selected_service'] = selected_service
         else:
             context['selected_service'] = None
+
+        current_category_id = self.request.GET.get('category')
+        if current_category_id:
+            current_category = models.Category.objects.get(id=current_category_id)
+            context['selected_category'] = current_category
+        else:
+            context['selected_category'] = models.Category.objects.first()
+
         return context
 
 
@@ -219,6 +239,12 @@ def save_selected_service(request, service_id):
     request.session['selected_service_id'] = service_id
     request.session['selected_master_id'] = None
     request.session['selected_schedule_id'] = None
+
+    selected_category_id = request.GET.get('category')
+    print(selected_category_id)
+
+    if selected_category_id:
+        return HttpResponseRedirect(f"{reverse('booking_service')}?category={selected_category_id}")
     return redirect('booking_service')
 
 
